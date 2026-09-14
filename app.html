@@ -967,4 +967,1865 @@ hr{
 
       <b>ℹ️ About WorldVibe</b>
 
-      <p class
+      <p class="muted">
+        WorldVibe 🌍🎬
+        <br>
+        Create • Connect • Discover
+      </p>
+
+    </div>
+
+
+    <div class="listitem">
+
+      <button
+        class="secondary"
+        onclick="openModal('legalModal')">
+        Terms • Privacy • Community Guidelines
+      </button>
+
+    </div>
+
+
+    <div class="listitem">
+
+      <button
+        class="danger"
+        onclick="confirmDelete()">
+        Delete Demo Account Data
+      </button>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="nav">
+
+  <button
+    class="active"
+    onclick="openPage('home',this)">
+    <b>⌂</b>
+    Home
+  </button>
+
+  <button
+    onclick="openPage('discover',this)">
+    <b>⌕</b>
+    Discover
+  </button>
+
+  <button
+    onclick="openPage('upload',this)">
+    <b>＋</b>
+    Create
+  </button>
+
+  <button
+    onclick="openPage('profile',this)">
+    <b>◉</b>
+    Profile
+  </button>
+
+  <button
+    onclick="openPage('settings',this)">
+    <b>☰</b>
+    Menu
+  </button>
+
+</nav>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toast" class="toast"></div>
+
+
+<!-- SEARCH MODAL -->
+
+<div id="searchModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('searchModal')">
+      ×
+    </button>
+
+    <h2>Search WorldVibe</h2>
+
+    <input
+      id="globalSearch"
+      placeholder="Search..."
+      oninput="globalSearch()">
+
+    <div id="globalResults"></div>
+
+  </div>
+
+</div>
+
+
+<!-- COMMENTS -->
+
+<div id="commentsModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('commentsModal')">
+      ×
+    </button>
+
+    <h2>Comments</h2>
+
+    <div id="comments"></div>
+
+    <div class="row">
+
+      <input
+        id="commentInput"
+        placeholder="Write a comment...">
+
+      <button
+        class="primary"
+        onclick="addComment()">
+        Send
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- EDIT PROFILE -->
+
+<div id="editProfileModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('editProfileModal')">
+      ×
+    </button>
+
+    <h2>Edit Profile</h2>
+
+    <input
+      id="editName"
+      placeholder="Name">
+
+    <input
+      id="editHandle"
+      placeholder="Username">
+
+    <textarea
+      id="editBio"
+      placeholder="Bio"></textarea>
+
+    <input
+      id="editPhoto"
+      type="file"
+      accept="image/*">
+
+    <button
+      class="primary"
+      onclick="saveProfile()">
+      Save
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- REPORT -->
+
+<div id="reportModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('reportModal')">
+      ×
+    </button>
+
+    <h2>Report</h2>
+
+    <select id="reportReason">
+
+      <option>Spam</option>
+      <option>Harassment</option>
+      <option>Violence</option>
+      <option>Scam</option>
+      <option>Copyright</option>
+      <option>Other</option>
+
+    </select>
+
+    <textarea
+      placeholder="Additional details"></textarea>
+
+    <button
+      class="danger"
+      onclick="submitReport()">
+      Submit Report
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- COINS -->
+
+<div id="coinsModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('coinsModal')">
+      ×
+    </button>
+
+    <h2>Buy Coins</h2>
+
+    <p class="muted">
+      Demo purchase interface.
+      Real payment will be connected later.
+    </p>
+
+    <div class="grid">
+
+      <button
+        class="primary"
+        onclick="buyCoins(100)">
+        100 🪙
+      </button>
+
+      <button
+        class="primary"
+        onclick="buyCoins(500)">
+        500 🪙
+      </button>
+
+      <button
+        class="primary"
+        onclick="buyCoins(1000)">
+        1,000 🪙
+      </button>
+
+      <button
+        class="primary"
+        onclick="buyCoins(5000)">
+        5,000 🪙
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- WITHDRAW -->
+
+<div id="withdrawModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('withdrawModal')">
+      ×
+    </button>
+
+    <h2>Withdrawal</h2>
+
+    <p class="muted">
+      Real withdrawal requires secure backend,
+      identity verification and payment provider.
+    </p>
+
+    <select>
+
+      <option>Bank Transfer</option>
+      <option>PayPal</option>
+      <option>Other Supported Method</option>
+
+    </select>
+
+    <input
+      placeholder="Amount">
+
+    <button
+      class="primary"
+      onclick="toast('Withdrawal request saved as demo')">
+      Request Withdrawal
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PRIVACY -->
+
+<div id="privacyModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('privacyModal')">
+      ×
+    </button>
+
+    <h2>Privacy Controls</h2>
+
+    <label>
+      <input type="checkbox">
+      Private account
+    </label>
+
+    <br>
+
+    <label>
+      <input type="checkbox" checked>
+      Allow messages
+    </label>
+
+    <br>
+
+    <label>
+      <input type="checkbox" checked>
+      Show activity status
+    </label>
+
+    <br>
+
+    <label>
+      <input type="checkbox" checked>
+      Allow downloads
+    </label>
+
+    <br><br>
+
+    <button
+      class="primary"
+      onclick="closeModal('privacyModal');toast('Privacy saved')">
+      Save
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- SECURITY -->
+
+<div id="securityModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('securityModal')">
+      ×
+    </button>
+
+    <h2>Security</h2>
+
+    <div class="notice">
+      🔐 Two-Factor Authentication
+    </div>
+
+    <button
+      class="primary"
+      onclick="toast('2FA setup UI ready')">
+      Enable 2FA
+    </button>
+
+    <h3>Active Sessions</h3>
+
+    <div class="notice">
+      📱 iPhone • Current Device
+    </div>
+
+    <button
+      class="secondary"
+      onclick="toast('Other sessions signed out')">
+      Sign Out Other Sessions
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- LEGAL -->
+
+<div id="legalModal" class="modal">
+
+  <div class="sheet">
+
+    <button
+      class="close"
+      onclick="closeModal('legalModal')">
+      ×
+    </button>
+
+    <h2>WorldVibe Policies</h2>
+
+    <h3>Terms</h3>
+
+    <p class="muted">
+      Use WorldVibe responsibly.
+      Do not upload illegal, harmful,
+      abusive or infringing content.
+    </p>
+
+    <h3>Privacy</h3>
+
+    <p class="muted">
+      A real deployment will store account
+      and content data through a secure backend.
+    </p>
+
+    <h3>Community Guidelines</h3>
+
+    <p class="muted">
+      No harassment, scams, dangerous content,
+      hate, exploitation or illegal activity.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   WORLDVIBE DATA
+========================= */
+
+const demoUsers=[
+
+ {
+  id:1,
+  name:"Alex",
+  handle:"@alex",
+  avatar:"https://i.pravatar.cc/150?img=12",
+  followers:12400
+ },
+
+ {
+  id:2,
+  name:"Sara",
+  handle:"@sara",
+  avatar:"https://i.pravatar.cc/150?img=32",
+  followers:9800
+ },
+
+ {
+  id:3,
+  name:"Omar",
+  handle:"@omar",
+  avatar:"https://i.pravatar.cc/150?img=53",
+  followers:7600
+ },
+
+ {
+  id:4,
+  name:"Maya",
+  handle:"@maya",
+  avatar:"https://i.pravatar.cc/150?img=44",
+  followers:5200
+ }
+
+];
+
+
+let posts=[
+
+ {
+  id:1,
+  user:demoUsers[0],
+  caption:"Beautiful world 🌍✨",
+  tags:"#travel #worldvibe",
+  likes:8200,
+  views:32000,
+  liked:false,
+  saved:false,
+  following:false,
+  comments:["Amazing!","🔥🔥🔥"]
+ },
+
+ {
+  id:2,
+  user:demoUsers[1],
+  caption:"Good vibes only 🎵",
+  tags:"#music #vibes",
+  likes:6100,
+  views:22000,
+  liked:false,
+  saved:false,
+  following:false,
+  comments:["Love this ❤️"]
+ },
+
+ {
+  id:3,
+  user:demoUsers[2],
+  caption:"Weekend energy 🚀",
+  tags:"#fun #weekend",
+  likes:4100,
+  views:14000,
+  liked:false,
+  saved:false,
+  following:false,
+  comments:[]
+ }
+
+];
+
+
+let myPosts=[];
+let drafts=[];
+let feedMode="foryou";
+let currentPost=null;
+let coins=1000;
+
+
+/* =========================
+   STORAGE
+========================= */
+
+function saveData(){
+
+ localStorage.setItem(
+  "worldvibe_posts",
+  JSON.stringify(myPosts)
+ );
+
+ localStorage.setItem(
+  "worldvibe_drafts",
+  JSON.stringify(drafts)
+ );
+
+ localStorage.setItem(
+  "worldvibe_coins",
+  coins
+ );
+
+}
+
+
+function loadData(){
+
+ try{
+
+  myPosts=
+   JSON.parse(
+    localStorage.getItem("worldvibe_posts")||"[]"
+   );
+
+  drafts=
+   JSON.parse(
+    localStorage.getItem("worldvibe_drafts")||"[]"
+   );
+
+  coins=
+   Number(
+    localStorage.getItem("worldvibe_coins")||1000
+   );
+
+ }catch(e){}
+
+ document.getElementById("coinBalance").textContent=coins;
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function toast(message){
+
+ const t=document.getElementById("toast");
+
+ t.textContent=message;
+
+ t.style.display="block";
+
+ clearTimeout(window.toastTimer);
+
+ window.toastTimer=setTimeout(
+  ()=>{
+   t.style.display="none";
+  },
+  2200
+ );
+
+}
+
+
+function openModal(id){
+
+ document.getElementById(id)
+ .classList.add("show");
+
+}
+
+
+function closeModal(id){
+
+ document.getElementById(id)
+ .classList.remove("show");
+
+}
+
+
+function esc(value){
+
+ return String(value||"")
+ .replace(/[&<>"']/g,function(m){
+
+  return {
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[m];
+
+ });
+
+}
+
+
+function fmt(n){
+
+ if(n>=1000000)
+  return (n/1000000).toFixed(1)+"M";
+
+ if(n>=1000)
+  return (n/1000).toFixed(1)+"K";
+
+ return n;
+
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function openPage(id,button){
+
+ document
+ .querySelectorAll(".page")
+ .forEach(p=>p.classList.remove("active"));
+
+ document
+ .getElementById(id)
+ .classList.add("active");
+
+ document
+ .querySelectorAll(".nav button")
+ .forEach(b=>b.classList.remove("active"));
+
+ if(button)
+  button.classList.add("active");
+
+ if(id==="home")
+  renderFeed();
+
+ if(id==="discover")
+  renderCreators();
+
+ if(id==="profile")
+  renderProfile();
+
+}
+
+
+function setFeed(mode,button){
+
+ feedMode=mode;
+
+ document
+ .querySelectorAll("#home .tabs button")
+ .forEach(b=>b.classList.remove("active"));
+
+ button.classList.add("active");
+
+ renderFeed();
+
+}
+
+
+/* =========================
+   FEED
+========================= */
+
+function allPosts(){
+
+ return [
+  ...myPosts,
+  ...posts
+ ];
+
+}
+
+
+function renderFeed(){
+
+ let arr=allPosts();
+
+ if(feedMode==="trending")
+  arr.sort((a,b)=>b.views-a.views);
+
+ if(feedMode==="latest")
+  arr=[...arr].reverse();
+
+ if(feedMode==="following")
+  arr=arr.filter(
+   p=>p.following || p.user.id===99
+  );
+
+
+ document.getElementById("feed").innerHTML=
+
+ arr.length
+
+ ?
+
+ arr.map(postCard).join("")
+
+ :
+
+ `<div class="section">
+   <div class="notice">
+    No videos here yet.
+   </div>
+  </div>`;
+
+}
+
+
+function postCard(post){
+
+ let media="";
+
+ if(post.media){
+
+  if(post.mediaType==="image"){
+
+   media=
+   `<img src="${post.media}">`;
+
+  }else{
+
+   media=
+   `<video src="${post.media}"
+    controls
+    playsinline></video>`;
+
+  }
+
+ }else{
+
+  media=
+  `<div class="videoPlaceholder">🎬</div>`;
+
+ }
+
+
+ return `
+
+ <article
+  class="card"
+  id="post${post.id}">
+
+  <div class="cardpad row">
+
+   <img
+    class="avatar"
+    src="${post.user.avatar ||
+    "https://i.pravatar.cc/100?img=1"}">
+
+   <div style="flex:1">
+
+    <b>${esc(post.user.name)}</b>
+
+    <span class="badge">
+     ✓ Creator
+    </span>
+
+    <div class="muted">
+     ${esc(post.user.handle)}
+    </div>
+
+   </div>
+
+   <button
+    class="secondary"
+    onclick="followUser(${post.id})">
+
+    ${post.following
+     ?"Following"
+     :"Follow"}
+
+   </button>
+
+  </div>
+
+
+  <div class="video">
+
+   ${media}
+
+   <div class="overlay">
+
+    <div class="caption">
+
+     <b>
+      ${esc(post.caption)}
+     </b>
+
+     <br>
+
+     <span class="small">
+      ${esc(post.tags||"")}
+     </span>
+
+    </div>
+
+
+    <div class="actions">
+
+     <button
+      class="action"
+      onclick="likePost(${post.id})">
+
+      ❤️ ${fmt(post.likes)}
+
+     </button>
+
+
+     <button
+      class="action"
+      onclick="showComments(${post.id})">
+
+      💬 ${post.comments.length}
+
+     </button>
+
+
+     <button
+      class="action"
+      onclick="sharePost(${post.id})">
+
+      ↗️ Share
+
+     </button>
+
+
+     <button
+      class="action"
+      onclick="savePost(${post.id})">
+
+      🔖
+
+     </button>
+
+
+     <button
+      class="action"
+      onclick="openReport(${post.id})">
+
+      🚩
+
+     </button>
+
+    </div>
+
+   </div>
+
+  </div>
+
+
+  <div class="cardpad row between">
+
+   <span class="muted">
+
+    👁 ${fmt(post.views)} views
+
+    • 🎵
+    ${esc(post.sound||"Original sound")}
+
+   </span>
+
+   <button
+    class="pill"
+    onclick="moreOptions(${post.id})">
+
+    •••
+
+   </button>
+
+  </div>
+
+ </article>
+
+ `;
+
+}
+
+
+/* =========================
+   LIKE / FOLLOW / SAVE
+========================= */
+
+function likePost(id){
+
+ let post=allPosts()
+ .find(p=>p.id===id);
+
+ if(!post)return;
+
+ post.liked=!post.liked;
+
+ post.likes +=
+  post.liked ? 1 : -1;
+
+ renderFeed();
+
+ toast(
+  post.liked
+  ?"Liked ❤️"
+  :"Like removed"
+ );
+
+}
+
+
+function followUser(id){
+
+ let post=allPosts()
+ .find(p=>p.id===id);
+
+ if(!post)return;
+
+ post.following=!post.following;
+
+ renderFeed();
+
+ toast(
+  post.following
+  ?"Following"
+  :"Unfollowed"
+ );
+
+}
+
+
+function savePost(id){
+
+ let post=allPosts()
+ .find(p=>p.id===id);
+
+ if(!post)return;
+
+ post.saved=!post.saved;
+
+ saveData();
+
+ toast(
+  post.saved
+  ?"Saved 🔖"
+  :"Removed from saved"
+ );
+
+}
+
+
+function moreOptions(id){
+
+ currentPost=
+ allPosts().find(p=>p.id===id);
+
+ toast("More options");
+
+}
+
+
+/* =========================
+   SHARE
+========================= */
+
+function sharePost(id){
+
+ const post=
+ allPosts().find(p=>p.id===id);
+
+ if(!post)return;
+
+ if(navigator.share){
+
+  navigator.share({
+
+   title:"WorldVibe 🌍🎬",
+
+   text:post.caption,
+
+   url:location.href
+
+  }).catch(()=>{});
+
+ }else{
+
+  if(navigator.clipboard){
+
+   navigator.clipboard.writeText(
+    location.href
+   );
+
+  }
+
+  toast("Link copied 🔗");
+
+ }
+
+}
+
+
+/* =========================
+   COMMENTS
+========================= */
+
+function showComments(id){
+
+ currentPost=
+ allPosts().find(p=>p.id===id);
+
+ if(!currentPost)return;
+
+ document.getElementById("comments").innerHTML=
+
+ currentPost.comments.length
+
+ ?
+
+ currentPost.comments
+ .map((comment,index)=>`
+
+  <div class="notice">
+
+   <div class="row between">
+
+    <span>
+     💬 ${esc(comment)}
+    </span>
+
+    <span class="muted">
+     ❤️
+    </span>
+
+   </div>
+
+  </div>
+
+ `).join("")
+
+ :
+
+ `<div class="muted">
+   No comments yet.
+  </div>`;
+
+ openModal("commentsModal");
+
+}
+
+
+function addComment(){
+
+ const input=
+ document.getElementById("commentInput");
+
+ const value=
+ input.value.trim();
+
+ if(!value || !currentPost)
+  return;
+
+ currentPost.comments.push(value);
+
+ input.value="";
+
+ showComments(currentPost.id);
+
+ renderFeed();
+
+ toast("Comment added 💬");
+
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+function previewUpload(){
+
+ const file=
+ document.getElementById("mediaFile")
+ .files[0];
+
+ if(!file)return;
+
+ const url=
+ URL.createObjectURL(file);
+
+ const box=
+ document.getElementById("uploadPreview");
+
+ if(file.type.startsWith("video/")){
+
+  box.innerHTML=
+  `<video
+   style="width:100%;max-height:300px"
+   controls
+   src="${url}">
+  </video>`;
+
+ }else{
+
+  box.innerHTML=
+  `<img
+   style="width:100%;max-height:300px;object-fit:contain"
+   src="${url}">`;
+
+ }
+
+}
+
+
+function publishPost(){
+
+ const file=
+ document.getElementById("mediaFile")
+ .files[0];
+
+ if(!file){
+
+  toast("Choose a video or photo first");
+
+  return;
+
+ }
+
+
+ const url=
+ URL.createObjectURL(file);
+
+
+ const post={
+
+  id:Date.now(),
+
+  user:{
+
+   id:99,
+
+   name:
+    document
+    .getElementById("profileName")
+    .textContent,
+
+   handle:
+    document
+    .getElementById("profileHandle")
+    .textContent,
+
+   avatar:
+    document
+    .getElementById("profileAvatar")
+    .src
+
+  },
+
+  caption:
+   document
+   .getElementById("caption")
+   .value
+   ||
+   "My new WorldVibe post 🌍",
+
+  tags:
+   document
+   .getElementById("hashtags")
+   .value,
+
+  likes:0,
+
+  views:0,
+
+  liked:false,
+
+  saved:false,
+
+  following:true,
+
+  comments:[],
+
+  media:url,
+
+  mediaType:
+   file.type.startsWith("image/")
+   ?"image"
+   :"video",
+
+  sound:
+   document
+   .getElementById("soundName")
+   .value
+   ||
+   "Original sound",
+
+  privacy:
+   document
+   .getElementById("privacy")
+   .value
+
+ };
+
+
+ myPosts.unshift(post);
+
+ saveData();
+
+ document.getElementById("mediaFile").value="";
+ document.getElementById("caption").value="";
+ document.getElementById("hashtags").value="";
+ document.getElementById("soundName").value="";
+
+ toast("Published 🚀");
+
+ openPage("home");
+
+}
+
+
+/* =========================
+   DRAFTS
+========================= */
+
+function saveDraft(){
+
+ drafts.push({
+
+  caption:
+   document
+   .getElementById("caption")
+   .value,
+
+  tags:
+   document
+   .getElementById("hashtags")
+   .value,
+
+  sound:
+   document
+   .getElementById("soundName")
+   .value,
+
+  date:
+   new Date().toLocaleString()
+
+ });
+
+ saveData();
+
+ toast("Draft saved 💾");
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function renderProfile(){
+
+ document.getElementById("profileContent")
+ .innerHTML=
+
+ myPosts.length
+
+ ?
+
+ myPosts.map(postCard).join("")
+
+ :
+
+ `<div class="section">
+
+   <div class="notice">
+
+    Your videos will appear here.
+
+   </div>
+
+  </div>`;
+
+}
+
+
+function profileTab(tab,button){
+
+ document
+ .querySelectorAll("#profile .tabs button")
+ .forEach(b=>b.classList.remove("active"));
+
+ button.classList.add("active");
+
+ const content=
+ document.getElementById("profileContent");
+
+
+ if(tab==="videos"){
+
+  renderProfile();
+
+  return;
+
+ }
+
+
+ if(tab==="drafts"){
+
+  content.innerHTML=
+
+  drafts.length
+
+  ?
+
+  drafts.map(d=>`
+
+   <div class="card cardpad">
+
+    <b>📝 Draft</b>
+
+    <p>${esc(d.caption)}</p>
+
+    <span class="muted">
+     ${esc(d.date)}
+    </span>
+
+   </div>
+
+  `).join("")
+
+  :
+
+  `<div class="section muted">
+    No drafts.
+   </div>`;
+
+  return;
+
+ }
+
+
+ let list=
+
+ tab==="saved"
+
+ ?
+
+ allPosts().filter(p=>p.saved)
+
+ :
+
+ allPosts().filter(p=>p.liked);
+
+
+ content.innerHTML=
+
+ list.length
+
+ ?
+
+ list.map(postCard).join("")
+
+ :
+
+ `<div class="section muted">
+   Nothing here yet.
+  </div>`;
+
+}
+
+
+/* =========================
+   EDIT PROFILE
+========================= */
+
+function saveProfile(){
+
+ const name=
+ document.getElementById("editName")
+ .value.trim();
+
+ const handle=
+ document.getElementById("editHandle")
+ .value.trim();
+
+ const bio=
+ document.getElementById("editBio")
+ .value.trim();
+
+
+ if(name)
+  document.getElementById("profileName")
+  .textContent=name;
+
+
+ if(handle)
+  document.getElementById("profileHandle")
+  .textContent=
+  handle.startsWith("@")
+  ?handle
+  :"@"+handle;
+
+
+ if(bio)
+  document.getElementById("profileBio")
+  .textContent=bio;
+
+
+ const file=
+ document.getElementById("editPhoto")
+ .files[0];
+
+
+ if(file){
+
+  document.getElementById("profileAvatar")
+  .src=
+  URL.createObjectURL(file);
+
+ }
+
+
+ closeModal("editProfileModal");
+
+ toast("Profile updated");
+
+}
+
+
+/* =========================
+   DISCOVER
+========================= */
+
+function renderCreators(){
+
+ document.getElementById("creators")
+ .innerHTML=
+
+ demoUsers.map(user=>`
+
+  <div class="notice row">
+
+   <img
+    class="avatar"
+    src="${user.avatar}">
+
+   <div style="flex:1">
+
+    <b>${user.name}</b>
+
+    <div class="muted">
+
+     ${user.handle}
+     •
+     ${fmt(user.followers)}
+     followers
+
+    </div>
+
+   </div>
+
+   <button
+    class="primary"
+    onclick="toast('Following ${user.name}')">
+
+    Follow
+
+   </button>
+
+  </div>
+
+ `).join("");
+
+}
+
+
+function searchAll(){
+
+ const q=
+ document
+ .getElementById("discoverSearch")
+ .value
+ .toLowerCase()
+ .trim();
+
+
+ if(!q){
+
+  document.getElementById("results")
+  .innerHTML=
+  "Type something above.";
+
+  return;
+
+ }
+
+
+ const result=
+ allPosts().filter(p=>
+
+  (
+   p.caption+
+   p.tags+
+   p.user.name+
+   p.user.handle
+  )
+  .toLowerCase()
+  .includes(q)
+
+ );
+
+
+ document.getElementById("results")
+ .innerHTML=
+
+ result.length
+
+ ?
+
+ result.map(postCard).join("")
+
+ :
+
+ "No results.";
+
+}
+
+
+function globalSearch(){
+
+ const q=
+ document
+ .getElementById("globalSearch")
+ .value
+ .toLowerCase()
+ .trim();
+
+
+ const result=
+ demoUsers.filter(user=>
+
+  (
+   user.name+
+   user.handle
+  )
+  .toLowerCase()
+  .includes(q)
+
+ );
+
+
+ document.getElementById("globalResults")
+ .innerHTML=
+
+ result.length
+
+ ?
+
+ result.map(user=>`
+
+  <div class="notice row">
+
+   <img
+    class="avatar"
+    src="${user.avatar}">
+
+   <div style="flex:1">
+
+    <b>${user.name}</b>
+
+    <div class="muted">
+     ${user.handle}
+    </div>
+
+   </div>
+
+   <button
+    class="primary"
+    onclick="toast('Following ${user.name}')">
+
+    Follow
+
+   </button>
+
+  </div>
+
+ `).join("")
+
+ :
+
+ `<div class="muted">
+   No users found.
+  </div>`;
+
+}
+
+
+/* =========================
+   REPORT
+========================= */
+
+function openReport(id){
+
+ currentPost=
+ allPosts().find(p=>p.id===id);
+
+ openModal("reportModal");
+
+}
+
+
+function submitReport(){
+
+ closeModal("reportModal");
+
+ toast("Report submitted 🚩");
+
+}
+
+
+/* =========================
+   COINS / GIFTS
+========================= */
+
+function gift(amount){
+
+ if(coins<amount){
+
+  toast("Not enough coins");
+
+  return;
+
+ }
+
+
+ coins-=amount;
+
+ document
+ .getElementById("coinBalance")
+ .textContent=coins;
+
+
+ document
+ .getElementById("giftHistory")
+ .innerHTML=
+ `
+  🎁 Sent gift worth
+  ${amount} coins
+  <br>
+ `+
+ document
+ .getElementById("giftHistory")
+ .innerHTML;
+
+
+ saveData();
+
+ toast("Gift sent 🎁");
+
+}
+
+
+function buyCoins(amount){
+
+ coins+=amount;
+
+ document
+ .getElementById("coinBalance")
+ .textContent=coins;
+
+ saveData();
+
+ closeModal("coinsModal");
+
+ toast(
+  amount+
+  " demo coins added 🪙"
+ );
+
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+ document
+ .body
+ .classList
+ .toggle("light");
+
+ localStorage.setItem(
+  "worldvibe_light",
+  document.body.classList.contains("light")
+ );
+
+}
+
+
+/* =========================
+   DATA EXPORT
+========================= */
+
+function exportData(){
+
+ const data={
+
+  profile:{
+
+   name:
+    document
+    .getElementById("profileName")
+    .textContent,
+
+   handle:
+    document
+    .getElementById("profileHandle")
+    .textContent
+
+  },
+
+  posts:myPosts,
+
+  drafts:drafts,
+
+  coins:coins
+
+ };
+
+
+ const blob=
+ new Blob(
+  [JSON.stringify(data,null,2)],
+  {type:"application/json"}
+ );
+
+
+ const url=
+ URL.createObjectURL(blob);
+
+
+ const a=
+ document.createElement("a");
+
+ a.href=url;
+
+ a.download=
+ "worldvibe-data.json";
+
+ a.click();
+
+ URL.revokeObjectURL(url);
+
+ toast("Data exported");
+
+}
+
+
+/* =========================
+   DELETE DEMO DATA
+========================= */
+
+function confirmDelete(){
+
+ if(
+  confirm(
+   "Delete all WorldVibe demo data?"
+  )
+ ){
+
+  localStorage.clear();
+
+  location.reload();
+
+ }
+
+}
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+loadData();
+
+
+if(
+ localStorage.getItem(
+  "worldvibe_light"
+ )==="true"
+){
+
+ document.body.classList.add("light");
+
+}
+
+
+document
+.getElementById("profileAvatar")
+.src=
+"https://i.pravatar.cc/150?img=68";
+
+
+renderFeed();
+
+renderCreators();
+
+renderProfile();
+
+</script>
+
+</body>
+</html>
