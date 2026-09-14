@@ -1416,7 +1416,31 @@ hr{
 
 </div>
 
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyArCb63lgx3tGMm1QPYQzeLNN7awL8Gx3A",
+    authDomain: "worldvibe-9f531.firebaseapp.com",
+    projectId: "worldvibe-9f531",
+    storageBucket: "worldvibe-9f531.firebasestorage.app",
+    messagingSenderId: "148680723994",
+    appId: "1:148680723994:web:c9cf32cd47d7a3ec190ba3",
+    measurementId: "G-WZ9G2B2EDP"
+  };
+
+  const firebaseApp = initializeApp(firebaseConfig);
+  const firebaseAuth = getAuth(firebaseApp);
+  const firebaseDB = getFirestore(firebaseApp);
+
+  window.firebaseApp = firebaseApp;
+  window.firebaseAuth = firebaseAuth;
+  window.firebaseDB = firebaseDB;
+
+  console.log("WorldVibe Firebase connected ✅");
+</script>
 <script>
 
 /* =========================
