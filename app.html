@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShortVibe</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:#000;color:#fff;font-family:Arial;overflow:hidden}
+#feed{width:100%;height:100%;overflow:auto}
+.card{position:relative;width:100%;height:100vh;overflow:hidden}
+video{width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.85))}
+.info{position:absolute;left:16px;bottom:85px}
+.info b{font-size:19px}
+.actions{position:absolute;right:15px;bottom:110px;display:flex;flex-direction:column;gap:20px}
+button{border:0;background:transparent;color:white;font-size:25px}
+small{display:block;font-size:11px}
+.upload{position:fixed;right:18px;bottom:68px;background:white;color:black;border-radius:50%;width:55px;height:55px;z-index:5}
+nav{position:fixed;bottom:0;left:0;right:0;height:58px;background:#050505;display:flex;justify-content:space-around;align-items:center;z-index:4}
+nav button{font-size:21px}
+nav span{display:block;font-size:9px}
+</style>
+</head>
+<body>
+
+<div id="feed">
+<section class="card">
+<video id="video" autoplay muted loop playsinline
+src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video>
+
+<div class="shade"></div>
+
+<div class="info">
+<b>@shortvibe</b>
+<p>Welcome to ShortVibe 🎬</p>
+<span>#shortvideo #fun</span>
+</div>
+
+<div class="actions">
+<button onclick="like()">❤️<small id="likes">0</small></button>
+<button onclick="share()">↗️<small>Share</small></button>
+<button onclick="sound()">🔇<small>Sound</small></button>
+</div>
+</section>
+</div>
+
+<input id="file" type="file" accept="video/*" hidden>
+<button class="upload" onclick="document.getElementById('file').click()">＋</button>
+
+<nav>
+<button>⌂<span>Home</span></button>
+<button>🔎<span>Search</span></button>
+<button onclick="document.getElementById('file').click()">＋<span>Upload</span></button>
+<button>♡<span>Following</span></button>
+<button>👤<span>Profile</span></button>
+</nav>
+
+<script>
+let n=0;
+
+function like(){
+ n++;
+ document.getElementById("likes").innerText=n;
+}
+
+function sound(){
+ let v=document.getElementById("video");
+ v.muted=!v.muted;
+}
+
+function share(){
+ if(navigator.share){
+  navigator.share({
+   title:"ShortVibe",
+   text:"Check this short video!"
+  });
+ }else{
+  alert("Share feature coming soon");
+ }
+}
+
+document.getElementById("file").onchange=function(){
+ if(this.files[0]){
+  let v=document.getElementById("video");
+  v.src=URL.createObjectURL(this.files[0]);
+  v.muted=false;
+  v.play();
+ }
+};
+</script>
+
+</body>
+</html>
