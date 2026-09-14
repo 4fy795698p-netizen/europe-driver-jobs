@@ -3,178 +3,1113 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>WorldVibe</title>
+<title>WorldVibe 🌍🎬</title>
+
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;background:#000;color:#fff;font-family:Arial;overflow:hidden}
-#feed{width:100%;height:100%;overflow:auto}
-.card{position:relative;width:100%;height:100vh;overflow:hidden}
-video{width:100%;height:100%;object-fit:cover}
-.shade{position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(0,0,0,.85));pointer-events:none}
-.info{position:absolute;left:16px;bottom:85px}
-.actions{position:absolute;right:15px;bottom:110px;display:flex;flex-direction:column;gap:20px;z-index:20}
-button{border:0;background:transparent;color:white;font-size:25px}
-small{display:block;font-size:11px}
-.upload{position:fixed;right:18px;bottom:68px;background:white;color:black;border-radius:50%;width:55px;height:55px;z-index:5}
-nav{position:fixed;bottom:0;left:0;right:0;height:58px;background:#050505;display:flex;justify-content:space-around;align-items:center;z-index:4}
-nav button{font-size:21px}
-nav span{display:block;font-size:9px}
+html,body{
+ margin:0;width:100%;height:100%;
+ background:#000;color:#fff;
+ font-family:Arial,sans-serif;
+ overflow:hidden
+}
+button{
+ border:0;background:none;color:#fff;
+ cursor:pointer
+}
+#app{width:100%;height:100%}
+#feed{
+ width:100%;height:100%;
+ overflow-y:auto;
+ scroll-snap-type:y mandatory
+}
+.card{
+ position:relative;
+ width:100%;
+ height:100vh;
+ overflow:hidden;
+ scroll-snap-align:start;
+ background:#111
+}
+.card video{
+ width:100%;height:100%;
+ object-fit:cover
+}
+.shade{
+ position:absolute;inset:0;
+ background:linear-gradient(transparent 45%,rgba(0,0,0,.9));
+ pointer-events:none
+}
+.topbar{
+ position:fixed;
+ top:0;left:0;right:0;
+ height:55px;
+ z-index:40;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ background:linear-gradient(rgba(0,0,0,.55),transparent)
+}
+.logo{
+ font-size:22px;
+ font-weight:bold
+}
+.info{
+ position:absolute;
+ left:16px;
+ bottom:92px;
+ z-index:10
+}
+.info b{font-size:17px}
+.info p{margin:8px 0}
+.info span{font-size:13px;color:#ddd}
+.actions{
+ position:absolute;
+ right:12px;
+ bottom:105px;
+ display:flex;
+ flex-direction:column;
+ gap:18px;
+ z-index:20;
+ text-align:center
+}
+.action{
+ font-size:28px;
+ min-width:48px
+}
+.action small{
+ display:block;
+ font-size:11px;
+ margin-top:2px
+}
+.followBtn{
+ background:#fff;
+ color:#000;
+ border-radius:20px;
+ padding:7px 14px;
+ font-weight:bold;
+ margin-top:8px
+}
+.upload{
+ position:fixed;
+ right:18px;
+ bottom:70px;
+ width:54px;height:54px;
+ border-radius:50%;
+ background:#fff;
+ color:#000;
+ font-size:30px;
+ z-index:35
+}
+nav{
+ position:fixed;
+ bottom:0;left:0;right:0;
+ height:60px;
+ background:#050505;
+ display:flex;
+ justify-content:space-around;
+ align-items:center;
+ z-index:30;
+ border-top:1px solid #222
+}
+nav button{
+ width:20%;
+ font-size:21px
+}
+nav span{
+ display:block;
+ font-size:9px;
+ margin-top:3px
+}
+.overlay{
+ display:none;
+ position:fixed;
+ inset:0;
+ background:#111;
+ z-index:100;
+ overflow-y:auto;
+ padding:22px 18px 80px
+}
+.close{
+ position:absolute;
+ right:14px;
+ top:12px;
+ font-size:25px
+}
+.profileHead{text-align:center;margin-top:35px}
+.avatar{
+ width:95px;height:95px;
+ border-radius:50%;
+ background:#333;
+ margin:auto;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ overflow:hidden;
+ font-size:45px
+}
+.avatar img{
+ width:100%;height:100%;
+ object-fit:cover;
+ display:none
+}
+.profileName{
+ font-size:22px;
+ margin:12px 0 4px
+}
+.muted{color:#aaa}
+.whiteBtn{
+ background:#fff;
+ color:#000;
+ border-radius:10px;
+ padding:10px 18px;
+ font-size:15px;
+ margin:6px
+}
+.stats{
+ display:flex;
+ justify-content:space-around;
+ text-align:center;
+ margin:25px 0
+}
+.stats b{font-size:18px}
+.stats small{
+ display:block;
+ color:#aaa;
+ margin-top:4px
+}
+.searchBox{
+ width:100%;
+ padding:13px;
+ border:1px solid #444;
+ border-radius:12px;
+ background:#222;
+ color:#fff;
+ font-size:16px;
+ margin:50px 0 15px
+}
+.searchResult{
+ padding:14px;
+ background:#222;
+ border-radius:12px;
+ margin:8px 0
+}
+.commentBox{
+ margin-top:15px
+}
+.commentItem{
+ background:rgba(0,0,0,.7);
+ padding:8px 12px;
+ border-radius:12px;
+ margin-top:7px
+}
+.menu{
+ background:#1d1d1d;
+ padding:15px;
+ border-radius:14px;
+ margin:10px 0
+}
+.coinBox{
+ background:linear-gradient(135deg,#222,#111);
+ border:1px solid #444;
+ border-radius:16px;
+ padding:20px;
+ text-align:center;
+ margin-top:15px
+}
+.coin{
+ font-size:32px;
+ font-weight:bold
+}
+.gift{
+ display:inline-block;
+ background:#292929;
+ padding:12px;
+ border-radius:12px;
+ margin:5px;
+ font-size:14px
+}
+.noData{
+ text-align:center;
+ color:#777;
+ padding:45px 0
+}
+.adBox{
+ margin:20px 0;
+ padding:18px;
+ text-align:center;
+ border:1px dashed #555;
+ border-radius:12px;
+ color:#888
+}
 </style>
 </head>
+
 <body>
 
+<div id="app">
+
+<div class="topbar">
+<div class="logo">WorldVibe 🌍🎬</div>
+</div>
+
 <div id="feed">
+
 <section class="card">
-<video id="video" autoplay muted loop playsinline
-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video>
+
+<video
+id="video"
+autoplay
+muted
+loop
+playsinline
+src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
+</video>
 
 <div class="shade"></div>
 
 <div class="info">
-<b>@worldvibe</b>
-<p>Welcome to ShortVibe 🎬</p>
-<span>#shortvideo #fun</span>
+<b id="videoUser">@worldvibe</b>
+<p id="videoCaption">Welcome to WorldVibe 🎬</p>
+<span>#shortvideo #fun #worldvibe</span>
+<br>
+<button class="followBtn" onclick="followUser()">+ Follow</button>
 </div>
 
 <div class="actions">
-<button onclick="like()">❤️<small id="likes">0</small></button>
-<button onclick="share()">↗️<small>Share</small></button>
-<button onclick="comment()">💬<small id="commentCount">0</small></button>
-<button onclick="sound()">🔇<small>Sound</small></button>
+
+<button class="action" onclick="likeVideo()">
+❤️
+<small id="likes">0</small>
+</button>
+
+<button class="action" onclick="commentVideo()">
+💬
+<small id="commentCount">0</small>
+</button>
+
+<button class="action" onclick="shareVideo()">
+↗️
+<small>Share</small>
+</button>
+
+<button class="action" onclick="toggleSound()">
+🔇
+<small id="soundText">Sound</small>
+</button>
+
+<button class="action" onclick="openGifts()">
+🎁
+<small>Gift</small>
+</button>
+
 </div>
+
+<div id="commentsBox"
+style="position:absolute;left:15px;bottom:145px;z-index:20;max-width:70%">
+</div>
+
 </section>
-<div id="commentsBox" style="position:absolute;left:15px;bottom:155px;z-index:20;font-size:14px;max-width:70%;"></div>
+
 </div>
-<input id="file" type="file" accept="video/*" hidden>
-<button class="upload" onclick="document.getElementById('file').click()">＋</button>
+
+<input id="videoInput" type="file" accept="video/*" hidden>
+
+<button class="upload" onclick="selectVideo()">＋</button>
 
 <nav>
-<button>⌂<span>Home</span></button>
-<button>🔎<span>Search</span></button>
-<button onclick="document.getElementById('file').click()">＋<span>Upload</span></button>
-<button>♡<span>Following</span></button>
-<button onclick="document.getElementById('profileBox').style.display='block'">👤<span>Profile</span></button>
+
+<button onclick="goHome()">
+⌂
+<span>Home</span>
+</button>
+
+<button onclick="openSearch()">
+🔎
+<span>Search</span>
+</button>
+
+<button onclick="selectVideo()">
+＋
+<span>Upload</span>
+</button>
+
+<button onclick="openFollowing()">
+♡
+<span>Following</span>
+</button>
+
+<button onclick="openProfile()">
+👤
+<span>Profile</span>
+</button>
+
 </nav>
-<div id="profileBox" style="display:none;position:fixed;inset:0;background:#111;color:white;z-index:50;padding:25px 18px;overflow:auto;">
 
-<button onclick="document.getElementById('profileBox').style.display='none'"
-style="position:absolute;right:15px;top:15px;font-size:25px;">✕</button>
 
-<div style="text-align:center;margin-top:35px;">
-<div style="width:90px;height:90px;border-radius:50%;background:#333;margin:auto;display:flex;align-items:center;justify-content:center;font-size:45px;">
-<img id="profilePhoto" style="width:100%;height:100%;object-fit:cover;display:none;">
-<span id="profileIcon" style="font-size:45px;">👤</span>
+<!-- PROFILE -->
+
+<div id="profileBox" class="overlay">
+
+<button class="close" onclick="closeOverlay('profileBox')">✕</button>
+
+<div class="profileHead">
+
+<div class="avatar">
+
+<img id="profilePhoto">
+
+<span id="profileIcon">👤</span>
+
 </div>
 
-<input id="profilePhotoInput" type="file" accept="image/*" hidden>
+<input
+id="profilePhotoInput"
+type="file"
+accept="image/*"
+hidden>
 
-<button onclick="document.getElementById('profilePhotoInput').click()"
-style="background:white;color:black;border-radius:10px;padding:10px 20px;font-size:15px;margin-top:15px;">
+<button
+class="whiteBtn"
+onclick="document.getElementById('profilePhotoInput').click()">
 📷 Change Photo
 </button>
+
+<div class="profileName" id="profileUsername">
+@worldvibe
 </div>
 
-<h2 style="margin-bottom:5px;">@worldvibe</h2>
-<p style="color:#aaa;">WorldVibe 🌍</p>
-<button onclick="editProfile()" style="background:white;color:black;border-radius:10px;padding:10px 30px;font-size:16px;">
+<div class="muted">
+WorldVibe 🌍
+</div>
+
+<button class="whiteBtn" onclick="editProfile()">
 ✏️ Edit Profile
 </button>
+
 </div>
 
-<div style="display:flex;justify-content:space-around;text-align:center;margin:30px 0;">
-<div><b>0</b><small>Videos</small></div>
-<div><b>0</b><small>Followers</small></div>
-<div><b>0</b><small>Following</small></div>
-<div><b>0</b><small>Likes</small></div>
+<div class="stats">
+
+<div>
+<b id="myVideosCount">0</b>
+<small>Videos</small>
 </div>
 
-<hr style="border-color:#333;">
+<div>
+<b id="followersCount">0</b>
+<small>Followers</small>
+</div>
+
+<div>
+<b id="followingCount">0</b>
+<small>Following</small>
+</div>
+
+<div>
+<b id="myLikesCount">0</b>
+<small>Likes</small>
+</div>
+
+</div>
+
+<hr style="border-color:#333">
 
 <h3>🎬 My Videos</h3>
-<div style="text-align:center;color:#888;padding:40px 0;">
+
+<div id="myVideos" class="noData">
 No videos yet
 </div>
 
-</div>
-<div style="position:fixed;top:15px;left:15px;z-index:10;font-size:24px;font-weight:bold;">
-WorldVibe 🌍
-</div>
-<script>
-let n=0;
+<h3>💰 Creator Center</h3>
 
+<div class="coinBox">
+
+<div class="coin">
+🪙 <span id="coins">0</span>
+</div>
+
+<p class="muted">
+Coins & creator earnings prototype
+</p>
+
+<button class="whiteBtn" onclick="openGifts()">
+🎁 Gifts
+</button>
+
+<button class="whiteBtn" onclick="showEarnings()">
+💰 Earnings
+</button>
+
+</div>
+
+<div class="adBox">
+📢 Advertisement Space
+<br>
+<small>Ads can be connected later with a real ad network.</small>
+</div>
+
+<div class="menu" onclick="showReport()">
+🚩 Report a Problem
+</div>
+
+<div class="menu" onclick="showBlock()">
+🚫 Block User
+</div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div id="searchBox" class="overlay">
+
+<button class="close" onclick="closeOverlay('searchBox')">✕</button>
+
+<input
+id="searchInput"
+class="searchBox"
+placeholder="Search users, videos..."
+oninput="searchUsers()">
+
+<div id="searchResults">
+
+<div class="noData">
+Search WorldVibe
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FOLLOWING -->
+
+<div id="followingBox" class="overlay">
+
+<button class="close" onclick="closeOverlay('followingBox')">✕</button>
+
+<h2 style="margin-top:50px">♡ Following</h2>
+
+<div id="followingList" class="noData">
+You are not following anyone yet.
+</div>
+
+</div>
+
+
+<!-- NOTIFICATIONS -->
+
+<div id="notificationBox" class="overlay">
+
+<button class="close" onclick="closeOverlay('notificationBox')">✕</button>
+
+<h2 style="margin-top:50px">🔔 Notifications</h2>
+
+<div id="notifications">
+
+<div class="menu">
+❤️ Welcome to WorldVibe
+</div>
+
+</div>
+
+</div>
+
+
+<!-- GIFTS -->
+
+<div id="giftBox" class="overlay">
+
+<button class="close" onclick="closeOverlay('giftBox')">✕</button>
+
+<h2 style="margin-top:50px">🎁 Send Gift</h2>
+
+<p class="muted">
+Choose a virtual gift.
+</p>
+
+<div>
+
+<button class="gift" onclick="sendGift(10)">
+🌹 Rose<br>10 coins
+</button>
+
+<button class="gift" onclick="sendGift(50)">
+❤️ Heart<br>50 coins
+</button>
+
+<button class="gift" onclick="sendGift(100)">
+💎 Diamond<br>100 coins
+</button>
+
+<button class="gift" onclick="sendGift(500)">
+👑 Crown<br>500 coins
+</button>
+
+</div>
+
+<div class="coinBox">
+Your Coins:
+<strong id="giftCoins">0</strong>
+</div>
+
+</div>
+
+
+<!-- NOTIFICATION BUTTON -->
+
+<button
+onclick="openNotifications()"
+style="
+position:fixed;
+top:13px;
+right:15px;
+z-index:45;
+font-size:22px;">
+🔔
+</button>
+
+</div>
+
+
+<script>
+
+let likes=0;
 let liked=false;
-function editProfile(){
- let name=prompt("Enter your name:");
- if(name){
-  document.querySelector("#profileBox h2").innerText="@"+name;
- }
+let followed=false;
+let followers=0;
+let following=0;
+let comments=0;
+let coins=0;
+let uploadedVideos=0;
+let myLikes=0;
+
+let followingUsers=[];
+
+function $(id){
+ return document.getElementById(id);
 }
 
-document.getElementById("profilePhotoInput").onchange=function(){
+
+/* HOME */
+
+function goHome(){
+
+ closeAll();
+
+ $('feed').scrollTop=0;
+
+}
+
+
+/* PROFILE */
+
+function openProfile(){
+
+ closeAll();
+
+ $('profileBox').style.display='block';
+
+ updateStats();
+
+}
+
+function editProfile(){
+
+ let name=prompt("Enter your name:");
+
+ if(name && name.trim()){
+
+  $('profileUsername').innerText="@"+name.trim();
+
+ }
+
+}
+
+
+/* PROFILE PHOTO */
+
+$('profilePhotoInput').onchange=function(){
+
  if(this.files[0]){
-  let photo=document.getElementById("profilePhoto");
-  let icon=document.getElementById("profileIcon");
+
+  let photo=$('profilePhoto');
+
+  let icon=$('profileIcon');
 
   photo.src=URL.createObjectURL(this.files[0]);
-  photo.style.display="block";
-  icon.style.display="none";
+
+  photo.style.display='block';
+
+  icon.style.display='none';
+
  }
+
 };
-function like(){
+
+
+/* LIKE */
+
+function likeVideo(){
+
  if(liked){
-  n--;
+
+  likes--;
+
   liked=false;
+
  }else{
-  n++;
+
+  likes++;
+
   liked=true;
+
  }
- document.getElementById("likes").innerText=n;
-}
-function comment(){
- let text=prompt("Write your comment:");
- if(text){
-  let count=document.getElementById("commentCount");
-  count.innerText=Number(count.innerText)+1;
 
-  let box=document.getElementById("commentsBox");
-  let newComment=document.createElement("div");
-  newComment.innerText="💬 "+text;
-  newComment.style.marginTop="8px";
-  newComment.style.background="rgba(0,0,0,.7)";
-  newComment.style.padding="8px 12px";
-  newComment.style.borderRadius="12px";
+ $('likes').innerText=likes;
 
-  box.appendChild(newComment);
- }
-}
-function sound(){
- let v=document.getElementById("video");
- v.muted=!v.muted;
+ myLikes=likes;
+
+ $('myLikesCount').innerText=myLikes;
+
 }
 
-function share(){
- if(navigator.share){
-  navigator.share({
-   title:"ShortVibe",
-   text:"Check this short video!"
-  });
+
+/* FOLLOW */
+
+function followUser(){
+
+ if(followed){
+
+  followed=false;
+
+  followers=Math.max(0,followers-1);
+
+  following=Math.max(0,following-1);
+
+  followingUsers=followingUsers.filter(
+   x=>x!=='@worldvibe'
+  );
+
  }else{
-  alert("Share feature coming soon");
+
+  followed=true;
+
+  followers++;
+
+  following++;
+
+  followingUsers.push('@worldvibe');
+
+  addNotification(
+   "You are now following @worldvibe"
+  );
+
  }
+
+ updateStats();
+
+ document.querySelector('.followBtn').innerText=
+ followed ? "✓ Following" : "+ Follow";
+
 }
 
-document.getElementById("file").onchange=function(){
- if(this.files[0]){
-  let v=document.getElementById("video");
-v.src=URL.createObjectURL(this.files[0]);
-v.muted=false;
-v.controls=true;
-v.load();
-v.onloadeddata=function(){
- v.play();
-};
+
+/* COMMENTS */
+
+function commentVideo(){
+
+ let text=prompt("Write your comment:");
+
+ if(!text || !text.trim()) return;
+
+ comments++;
+
+ $('commentCount').innerText=comments;
+
+ let item=document.createElement('div');
+
+ item.className='commentItem';
+
+ item.innerText="💬 "+text.trim();
+
+ $('commentsBox').appendChild(item);
+
+}
+
+
+/* SOUND */
+
+function toggleSound(){
+
+ let v=$('video');
+
+ v.muted=!v.muted;
+
+ $('soundText').innerText=
+ v.muted ? "Sound" : "Mute";
+
+}
+
+
+/* SHARE */
+
+function shareVideo(){
+
+ if(navigator.share){
+
+  navigator.share({
+
+   title:"WorldVibe",
+
+   text:"Check this video on WorldVibe 🌍🎬"
+
+  }).catch(()=>{});
+
+ }else{
+
+  alert("Share feature is available on this device/browser.");
+
  }
+
+}
+
+
+/* UPLOAD */
+
+function selectVideo(){
+
+ $('videoInput').click();
+
+}
+
+$('videoInput').onchange=function(){
+
+ if(!this.files[0]) return;
+
+ let file=this.files[0];
+
+ let url=URL.createObjectURL(file);
+
+ let v=$('video');
+
+ v.src=url;
+
+ v.muted=false;
+
+ v.controls=true;
+
+ v.load();
+
+ v.play().catch(()=>{});
+
+ uploadedVideos++;
+
+ updateStats();
+
+ $('myVideos').innerHTML=
+ '<div class="menu">🎬 '+escapeHtml(file.name)+'</div>';
+
+ $('videoCaption').innerText=
+ "My new WorldVibe video 🎬";
+
+ addNotification(
+  "Your video was uploaded successfully."
+ );
+
 };
+
+
+/* SEARCH */
+
+function openSearch(){
+
+ closeAll();
+
+ $('searchBox').style.display='block';
+
+ setTimeout(()=>{
+  $('searchInput').focus();
+ },100);
+
+}
+
+function searchUsers(){
+
+ let q=$('searchInput').value.toLowerCase().trim();
+
+ let box=$('searchResults');
+
+ if(!q){
+
+  box.innerHTML=
+  '<div class="noData">Search WorldVibe</div>';
+
+  return;
+
+ }
+
+ let users=[
+  '@worldvibe',
+  '@creator',
+  '@music',
+  '@travel',
+  '@fun',
+  '@sports'
+ ];
+
+ let results=users.filter(
+  u=>u.includes(q)
+ );
+
+ if(results.length===0){
+
+  box.innerHTML=
+  '<div class="noData">No results found</div>';
+
+  return;
+
+ }
+
+ box.innerHTML='';
+
+ results.forEach(user=>{
+
+  let div=document.createElement('div');
+
+  div.className='searchResult';
+
+  div.innerHTML=
+  '<b>'+user+'</b><br>'+
+  '<small class="muted">WorldVibe creator</small>';
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* FOLLOWING */
+
+function openFollowing(){
+
+ closeAll();
+
+ $('followingBox').style.display='block';
+
+ renderFollowing();
+
+}
+
+function renderFollowing(){
+
+ let box=$('followingList');
+
+ if(followingUsers.length===0){
+
+  box.className='noData';
+
+  box.innerText=
+  'You are not following anyone yet.';
+
+  return;
+
+ }
+
+ box.className='';
+
+ box.innerHTML='';
+
+ followingUsers.forEach(user=>{
+
+  let div=document.createElement('div');
+
+  div.className='searchResult';
+
+  div.innerHTML=
+  '👤 <b>'+user+'</b>';
+
+  box.appendChild(div);
+
+ });
+
+}
+
+
+/* NOTIFICATIONS */
+
+function openNotifications(){
+
+ closeAll();
+
+ $('notificationBox').style.display='block';
+
+}
+
+function addNotification(text){
+
+ let div=document.createElement('div');
+
+ div.className='menu';
+
+ div.innerText='🔔 '+text;
+
+ $('notifications').prepend(div);
+
+}
+
+
+/* GIFTS */
+
+function openGifts(){
+
+ closeAll();
+
+ $('giftBox').style.display='block';
+
+ $('giftCoins').innerText=coins;
+
+}
+
+function sendGift(amount){
+
+ if(coins < amount){
+
+  alert(
+   "Not enough coins in prototype."
+  );
+
+  return;
+
+ }
+
+ coins-=amount;
+
+ $('giftCoins').innerText=coins;
+
+ $('coins').innerText=coins;
+
+ addNotification(
+  "You sent a gift worth "+amount+" coins."
+ );
+
+ alert("Gift sent 🎁");
+
+}
+
+
+/* EARNINGS */
+
+function showEarnings(){
+
+ alert(
+  "Creator Earnings\n\n"+
+  "Coins: "+coins+"\n\n"+
+  "Real money withdrawals will be connected later with a secure payment system."
+ );
+
+}
+
+
+/* REPORT */
+
+function showReport(){
+
+ let text=prompt(
+  "Tell us about the problem:"
+ );
+
+ if(text){
+
+  addNotification(
+   "Your report has been submitted."
+  );
+
+  alert(
+   "Report submitted successfully."
+  );
+
+ }
+
+}
+
+
+/* BLOCK */
+
+function showBlock(){
+
+ if(confirm(
+  "Block @worldvibe?"
+ )){
+
+  addNotification(
+   "User blocked in prototype."
+  );
+
+  alert("User blocked.");
+
+ }
+
+}
+
+
+/* STATS */
+
+function updateStats(){
+
+ $('myVideosCount').innerText=
+ uploadedVideos;
+
+ $('followersCount').innerText=
+ followers;
+
+ $('followingCount').innerText=
+ following;
+
+ $('myLikesCount').innerText=
+ myLikes;
+
+}
+
+
+/* CLOSE */
+
+function closeOverlay(id){
+
+ $(id).style.display='none';
+
+}
+
+function closeAll(){
+
+ document.querySelectorAll('.overlay')
+ .forEach(x=>{
+  x.style.display='none';
+ });
+
+}
+
+
+/* ESCAPE */
+
+function escapeHtml(text){
+
+ return text
+ .replace(/&/g,'&amp;')
+ .replace(/</g,'&lt;')
+ .replace(/>/g,'&gt;')
+ .replace(/"/g,'&quot;')
+ .replace(/'/g,'&#039;');
+
+}
+
+
+/* INITIAL */
+
+updateStats();
+
 </script>
 
 </body>
