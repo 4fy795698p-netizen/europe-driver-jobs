@@ -1,1116 +1,970 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#050505">
 <title>WorldVibe 🌍🎬</title>
 
 <style>
 *{box-sizing:border-box}
-html,body{
- margin:0;width:100%;height:100%;
- background:#000;color:#fff;
- font-family:Arial,sans-serif;
- overflow:hidden
+html,body{margin:0;background:#050505;color:#fff;font-family:Arial,Helvetica,sans-serif}
+body.light{background:#f2f2f2;color:#111}
+button,input,textarea,select{font:inherit}
+button{border:0;cursor:pointer}
+
+.app{max-width:620px;margin:auto;min-height:100vh;background:#090909}
+body.light .app{background:#fff}
+
+.top{
+ position:sticky;top:0;z-index:30;
+ background:#090909ee;backdrop-filter:blur(14px);
+ padding:12px 14px;border-bottom:1px solid #252525
 }
-button{
- border:0;background:none;color:#fff;
- cursor:pointer
+body.light .top{background:#fffffff2}
+
+.brand{font-size:22px;font-weight:800}
+.sub{font-size:11px;color:#999}
+
+.row{display:flex;align-items:center;gap:8px}
+.between{justify-content:space-between}
+
+.icon{
+ width:40px;height:40px;border-radius:50%;
+ background:#1b1b1b;color:#fff
 }
-#app{width:100%;height:100%}
-#feed{
- width:100%;height:100%;
- overflow-y:auto;
- scroll-snap-type:y mandatory
+
+.page{display:none;padding-bottom:90px}
+.page.active{display:block}
+
+.pad{padding:14px}
+.section{margin:15px 14px}
+
+.tabs{
+ display:flex;gap:8px;overflow:auto;
+ padding:10px 14px
 }
+.tabs button{
+ background:#191919;color:#aaa;
+ border-radius:20px;padding:9px 14px;
+ white-space:nowrap
+}
+.tabs button.active{background:#fff;color:#000}
+
 .card{
- position:relative;
- width:100%;
- height:100vh;
- overflow:hidden;
- scroll-snap-align:start;
- background:#111
+ background:#111;border:1px solid #252525;
+ border-radius:18px;margin:12px 14px;overflow:hidden
 }
-.card video{
- width:100%;height:100%;
- object-fit:cover
+body.light .card{background:#fff;border-color:#ddd}
+
+.cardpad{padding:14px}
+
+.video{
+ height:480px;background:#000;
+ position:relative;overflow:hidden;
+ display:flex;align-items:center;justify-content:center
 }
-.shade{
- position:absolute;inset:0;
- background:linear-gradient(transparent 45%,rgba(0,0,0,.9));
- pointer-events:none
+
+.video video,.video img{
+ width:100%;height:100%;object-fit:cover
 }
-.topbar{
- position:fixed;
- top:0;left:0;right:0;
- height:55px;
- z-index:40;
- display:flex;
- align-items:center;
- justify-content:center;
- background:linear-gradient(rgba(0,0,0,.55),transparent)
+
+.videoPlaceholder{
+ font-size:70px
 }
-.logo{
- font-size:22px;
- font-weight:bold
+
+.overlay{
+ position:absolute;left:12px;right:12px;bottom:12px;
+ display:flex;justify-content:space-between;
+ align-items:flex-end
 }
-.info{
- position:absolute;
- left:16px;
- bottom:92px;
- z-index:10
+
+.caption{
+ max-width:70%;
+ text-shadow:0 2px 6px #000
 }
-.info b{font-size:17px}
-.info p{margin:8px 0}
-.info span{font-size:13px;color:#ddd}
+
 .actions{
- position:absolute;
- right:12px;
- bottom:105px;
- display:flex;
- flex-direction:column;
- gap:18px;
- z-index:20;
+ display:flex;flex-direction:column;gap:8px
+}
+
+.action{
+ background:#000a;color:#fff;
+ border-radius:20px;padding:9px 11px
+}
+
+.avatar{
+ width:42px;height:42px;border-radius:50%;
+ object-fit:cover;background:#333
+}
+
+.avatar.big{width:82px;height:82px}
+
+.muted{color:#999;font-size:13px}
+.red{color:#ff375f}
+.gold{color:#ffd54a}
+.green{color:#35d07f}
+
+.pill{
+ background:#1b1b1b;color:#fff;
+ border-radius:22px;padding:9px 13px
+}
+
+input,textarea,select{
+ width:100%;
+ background:#181818;color:#fff;
+ border:1px solid #303030;
+ border-radius:12px;padding:12px;
+ margin:6px 0;outline:none
+}
+
+body.light input,
+body.light textarea,
+body.light select{
+ background:#eee;color:#111;border-color:#ccc
+}
+
+.primary{
+ background:#fff;color:#000;
+ padding:12px 16px;border-radius:12px;
+ font-weight:700
+}
+
+.secondary{
+ background:#242424;color:#fff;
+ padding:12px 16px;border-radius:12px
+}
+
+.danger{
+ background:#ff375f;color:#fff;
+ padding:12px 16px;border-radius:12px
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:10px
+}
+
+.stat{
+ background:#151515;
+ border:1px solid #282828;
+ border-radius:14px;
+ padding:13px;
  text-align:center
 }
-.action{
- font-size:28px;
- min-width:48px
+
+body.light .stat{background:#f2f2f2;border-color:#ddd}
+
+.stat b{
+ display:block;font-size:20px
 }
-.action small{
- display:block;
- font-size:11px;
- margin-top:2px
+
+.listitem{
+ padding:14px 0;
+ border-bottom:1px solid #262626
 }
-.followBtn{
- background:#fff;
- color:#000;
- border-radius:20px;
- padding:7px 14px;
- font-weight:bold;
- margin-top:8px
-}
-.upload{
- position:fixed;
- right:18px;
- bottom:70px;
- width:54px;height:54px;
- border-radius:50%;
- background:#fff;
- color:#000;
- font-size:30px;
- z-index:35
-}
-nav{
- position:fixed;
- bottom:0;left:0;right:0;
- height:60px;
- background:#050505;
- display:flex;
- justify-content:space-around;
- align-items:center;
- z-index:30;
- border-top:1px solid #222
-}
-nav button{
- width:20%;
- font-size:21px
-}
-nav span{
- display:block;
- font-size:9px;
- margin-top:3px
-}
-.overlay{
- display:none;
- position:fixed;
- inset:0;
- background:#111;
- z-index:100;
- overflow-y:auto;
- padding:22px 18px 80px
-}
-.close{
- position:absolute;
- right:14px;
- top:12px;
- font-size:25px
-}
-.profileHead{text-align:center;margin-top:35px}
-.avatar{
- width:95px;height:95px;
- border-radius:50%;
- background:#333;
- margin:auto;
- display:flex;
- align-items:center;
- justify-content:center;
- overflow:hidden;
- font-size:45px
-}
-.avatar img{
- width:100%;height:100%;
- object-fit:cover;
- display:none
-}
-.profileName{
- font-size:22px;
- margin:12px 0 4px
-}
-.muted{color:#aaa}
-.whiteBtn{
- background:#fff;
- color:#000;
- border-radius:10px;
- padding:10px 18px;
- font-size:15px;
- margin:6px
-}
-.stats{
- display:flex;
- justify-content:space-around;
- text-align:center;
- margin:25px 0
-}
-.stats b{font-size:18px}
-.stats small{
- display:block;
- color:#aaa;
- margin-top:4px
-}
-.searchBox{
- width:100%;
- padding:13px;
- border:1px solid #444;
+
+.notice{
+ background:#171717;
  border-radius:12px;
- background:#222;
- color:#fff;
- font-size:16px;
- margin:50px 0 15px
-}
-.searchResult{
- padding:14px;
- background:#222;
- border-radius:12px;
+ padding:12px;
  margin:8px 0
 }
-.commentBox{
- margin-top:15px
-}
-.commentItem{
- background:rgba(0,0,0,.7);
- padding:8px 12px;
- border-radius:12px;
- margin-top:7px
-}
-.menu{
- background:#1d1d1d;
- padding:15px;
- border-radius:14px;
- margin:10px 0
-}
-.coinBox{
- background:linear-gradient(135deg,#222,#111);
- border:1px solid #444;
- border-radius:16px;
- padding:20px;
- text-align:center;
- margin-top:15px
-}
-.coin{
- font-size:32px;
- font-weight:bold
-}
-.gift{
- display:inline-block;
+
+body.light .notice{background:#eee}
+
+.badge{
+ font-size:11px;
  background:#292929;
- padding:12px;
- border-radius:12px;
- margin:5px;
- font-size:14px
+ border-radius:10px;
+ padding:4px 7px
 }
-.noData{
- text-align:center;
- color:#777;
- padding:45px 0
+
+.nav{
+ position:fixed;
+ bottom:0;
+ left:50%;
+ transform:translateX(-50%);
+ width:min(620px,100%);
+ z-index:40;
+ display:grid;
+ grid-template-columns:repeat(5,1fr);
+ background:#090909f7;
+ border-top:1px solid #292929;
+ padding:7px 4px
 }
-.adBox{
- margin:20px 0;
+
+body.light .nav{background:#fff}
+
+.nav button{
+ background:none;
+ color:#999;
+ padding:5px;
+ font-size:11px
+}
+
+.nav button.active{color:#fff}
+body.light .nav button.active{color:#000}
+
+.nav b{
+ display:block;
+ font-size:20px
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:#000b;
+ z-index:100;
+ display:none;
+ align-items:flex-end
+}
+
+.modal.show{display:flex}
+
+.sheet{
+ background:#101010;
+ color:#fff;
+ width:100%;
+ max-width:620px;
+ margin:auto;
+ border-radius:22px 22px 0 0;
  padding:18px;
- text-align:center;
- border:1px dashed #555;
- border-radius:12px;
- color:#888
+ max-height:88vh;
+ overflow:auto
+}
+
+body.light .sheet{background:#fff;color:#111}
+
+.close{
+ float:right;
+ width:34px;height:34px;
+ border-radius:50%;
+ background:#222;color:#fff
+}
+
+.toast{
+ position:fixed;
+ bottom:95px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#fff;color:#000;
+ padding:12px 18px;
+ border-radius:24px;
+ z-index:200;
+ display:none
+}
+
+.search{
+ display:flex;gap:8px
+}
+
+.search input{margin:0}
+
+.small{font-size:12px}
+
+hr{
+ border:0;border-top:1px solid #292929
+}
+
+.live{
+ background:#ff1744;
+ border-radius:8px;
+ padding:4px 7px;
+ font-size:11px
 }
 </style>
 </head>
 
 <body>
 
-<div id="app">
+<div class="app">
 
-<div class="topbar">
-<div class="logo">WorldVibe 🌍🎬</div>
-</div>
+<header class="top row between">
+  <div>
+    <div class="brand">WorldVibe 🌍🎬</div>
+    <div class="sub">Create • Connect • Discover</div>
+  </div>
 
-<div id="feed">
+  <div class="row">
+    <button class="icon" onclick="openModal('searchModal')">🔎</button>
+    <button class="icon" onclick="openPage('notifications')">🔔</button>
+  </div>
+</header>
 
-<section class="card">
 
-<video
-id="video"
-autoplay
-muted
-loop
-playsinline
-src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">
-</video>
+<!-- HOME -->
 
-<div class="shade"></div>
+<main id="home" class="page active">
 
-<div class="info">
-<b id="videoUser">@worldvibe</b>
-<p id="videoCaption">Welcome to WorldVibe 🎬</p>
-<span>#shortvideo #fun #worldvibe</span>
-<br>
-<button class="followBtn" onclick="followUser()">+ Follow</button>
-</div>
+  <div class="tabs">
 
-<div class="actions">
+    <button class="active"
+      onclick="setFeed('foryou',this)">
+      For You
+    </button>
 
-<button class="action" onclick="likeVideo()">
-❤️
-<small id="likes">0</small>
-</button>
+    <button onclick="setFeed('following',this)">
+      Following
+    </button>
 
-<button class="action" onclick="commentVideo()">
-💬
-<small id="commentCount">0</small>
-</button>
+    <button onclick="setFeed('trending',this)">
+      🔥 Trending
+    </button>
 
-<button class="action" onclick="shareVideo()">
-↗️
-<small>Share</small>
-</button>
+    <button onclick="setFeed('latest',this)">
+      Latest
+    </button>
 
-<button class="action" onclick="toggleSound()">
-🔇
-<small id="soundText">Sound</small>
-</button>
+  </div>
 
-<button class="action" onclick="openGifts()">
-🎁
-<small>Gift</small>
-</button>
+  <div id="feed"></div>
 
-</div>
+</main>
 
-<div id="commentsBox"
-style="position:absolute;left:15px;bottom:145px;z-index:20;max-width:70%">
-</div>
 
-</section>
+<!-- DISCOVER -->
 
-</div>
+<main id="discover" class="page">
 
-<input id="videoInput" type="file" accept="video/*" hidden>
+  <div class="pad">
 
-<button class="upload" onclick="selectVideo()">＋</button>
+    <div class="search">
 
-<nav>
+      <input
+        id="discoverSearch"
+        placeholder="Search people, videos, hashtags..."
+        oninput="searchAll()">
 
-<button onclick="goHome()">
-⌂
-<span>Home</span>
-</button>
+      <button
+        class="primary"
+        onclick="searchAll()">
+        Search
+      </button>
 
-<button onclick="openSearch()">
-🔎
-<span>Search</span>
-</button>
+    </div>
 
-<button onclick="selectVideo()">
-＋
-<span>Upload</span>
-</button>
+  </div>
 
-<button onclick="openFollowing()">
-♡
-<span>Following</span>
-</button>
+  <div class="tabs">
 
-<button onclick="openProfile()">
-👤
-<span>Profile</span>
-</button>
+    <button class="active">
+      🔥 Trending
+    </button>
 
-</nav>
+    <button onclick="toast('Challenges ready for backend')">
+      🏆 Challenges
+    </button>
+
+    <button onclick="toast('Sounds library ready')">
+      🎵 Sounds
+    </button>
+
+  </div>
+
+  <div class="section">
+
+    <h2>Trending Creators</h2>
+
+    <div id="creators"></div>
+
+  </div>
+
+  <div class="section">
+
+    <h2>Trending Hashtags</h2>
+
+    <div class="row" style="flex-wrap:wrap">
+
+      <span class="pill">#WorldVibe</span>
+      <span class="pill">#Travel</span>
+      <span class="pill">#Music</span>
+      <span class="pill">#Comedy</span>
+      <span class="pill">#Football</span>
+      <span class="pill">#Viral</span>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <h2>Search Results</h2>
+
+    <div id="results" class="muted">
+      Type something above.
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- CREATE -->
+
+<main id="upload" class="page">
+
+  <div class="section">
+
+    <h2>Create Post</h2>
+
+    <div class="card cardpad">
+
+      <label>Video / Photo</label>
+
+      <input
+        id="mediaFile"
+        type="file"
+        accept="video/*,image/*"
+        onchange="previewUpload()">
+
+      <div id="uploadPreview" class="notice">
+        Choose a video or image.
+      </div>
+
+      <textarea
+        id="caption"
+        rows="3"
+        placeholder="Write a caption... #WorldVibe">
+      </textarea>
+
+      <input
+        id="hashtags"
+        placeholder="Hashtags">
+
+      <input
+        id="soundName"
+        placeholder="Sound / music name">
+
+      <input
+        id="postLocation"
+        placeholder="Location">
+
+      <select id="privacy">
+        <option>Public</option>
+        <option>Followers</option>
+        <option>Private</option>
+      </select>
+
+      <div class="grid">
+
+        <button
+          class="secondary"
+          onclick="saveDraft()">
+          💾 Save Draft
+        </button>
+
+        <button
+          class="primary"
+          onclick="publishPost()">
+          🚀 Publish
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card cardpad">
+
+      <h3>Video Editor</h3>
+
+      <div class="grid">
+
+        <button class="secondary"
+          onclick="toast('Trim editor UI ready')">
+          ✂️ Trim
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Speed controls ready')">
+          ⏩ Speed
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Text & stickers ready')">
+          ✨ Text
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Filters ready')">
+          🎨 Filters
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Voice-over ready')">
+          🎙️ Voice
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Duet / Remix ready')">
+          🔀 Remix
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="card cardpad">
+
+      <h3>Other Post Types</h3>
+
+      <div class="grid">
+
+        <button class="secondary"
+          onclick="toast('Photo slideshow ready')">
+          🖼️ Slideshow
+        </button>
+
+        <button class="secondary"
+          onclick="toast('LIVE interface ready')">
+          🔴 LIVE
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Schedule post ready')">
+          📅 Schedule
+        </button>
+
+        <button class="secondary"
+          onclick="toast('Promote interface ready')">
+          📣 Promote
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
 
 
 <!-- PROFILE -->
 
-<div id="profileBox" class="overlay">
+<main id="profile" class="page">
 
-<button class="close" onclick="closeOverlay('profileBox')">✕</button>
+  <div class="section">
 
-<div class="profileHead">
+    <div class="row">
 
-<div class="avatar">
+      <img
+        id="profileAvatar"
+        class="avatar big"
+        alt="Profile">
 
-<img id="profilePhoto">
+      <div style="flex:1">
 
-<span id="profileIcon">👤</span>
+        <h2 id="profileName">Nafeed</h2>
 
-</div>
+        <div id="profileHandle" class="muted">
+          @nafeed
+        </div>
 
-<input
-id="profilePhotoInput"
-type="file"
-accept="image/*"
-hidden>
+        <p id="profileBio" class="muted">
+          Welcome to WorldVibe 🌍🎬
+        </p>
 
-<button
-class="whiteBtn"
-onclick="document.getElementById('profilePhotoInput').click()">
-📷 Change Photo
-</button>
+      </div>
 
-<div class="profileName" id="profileUsername">
-@worldvibe
-</div>
+      <button
+        class="secondary"
+        onclick="openModal('editProfileModal')">
+        Edit
+      </button>
 
-<div class="muted">
-WorldVibe 🌍
-</div>
-
-<button class="whiteBtn" onclick="editProfile()">
-✏️ Edit Profile
-</button>
-
-</div>
-
-<div class="stats">
-
-<div>
-<b id="myVideosCount">0</b>
-<small>Videos</small>
-</div>
-
-<div>
-<b id="followersCount">0</b>
-<small>Followers</small>
-</div>
-
-<div>
-<b id="followingCount">0</b>
-<small>Following</small>
-</div>
-
-<div>
-<b id="myLikesCount">0</b>
-<small>Likes</small>
-</div>
-
-</div>
-
-<hr style="border-color:#333">
-
-<h3>🎬 My Videos</h3>
-
-<div id="myVideos" class="noData">
-No videos yet
-</div>
-
-<h3>💰 Creator Center</h3>
-
-<div class="coinBox">
-
-<div class="coin">
-🪙 <span id="coins">0</span>
-</div>
-
-<p class="muted">
-Coins & creator earnings prototype
-</p>
-
-<button class="whiteBtn" onclick="openGifts()">
-🎁 Gifts
-</button>
-
-<button class="whiteBtn" onclick="showEarnings()">
-💰 Earnings
-</button>
-
-</div>
-
-<div class="adBox">
-📢 Advertisement Space
-<br>
-<small>Ads can be connected later with a real ad network.</small>
-</div>
-
-<div class="menu" onclick="showReport()">
-🚩 Report a Problem
-</div>
-
-<div class="menu" onclick="showBlock()">
-🚫 Block User
-</div>
-
-</div>
+    </div>
 
 
-<!-- SEARCH -->
+    <div
+      class="grid"
+      style="margin-top:14px">
 
-<div id="searchBox" class="overlay">
+      <div class="stat">
+        <b>128</b>
+        Followers
+      </div>
 
-<button class="close" onclick="closeOverlay('searchBox')">✕</button>
+      <div class="stat">
+        <b>86</b>
+        Following
+      </div>
 
-<input
-id="searchInput"
-class="searchBox"
-placeholder="Search users, videos..."
-oninput="searchUsers()">
+      <div class="stat">
+        <b>2.4K</b>
+        Likes
+      </div>
 
-<div id="searchResults">
+      <div class="stat">
+        <b>18.6K</b>
+        Views
+      </div>
 
-<div class="noData">
-Search WorldVibe
-</div>
+    </div>
 
-</div>
-
-</div>
+  </div>
 
 
-<!-- FOLLOWING -->
+  <div class="tabs">
 
-<div id="followingBox" class="overlay">
+    <button
+      class="active"
+      onclick="profileTab('videos',this)">
+      🎬 Videos
+    </button>
 
-<button class="close" onclick="closeOverlay('followingBox')">✕</button>
+    <button
+      onclick="profileTab('saved',this)">
+      🔖 Saved
+    </button>
 
-<h2 style="margin-top:50px">♡ Following</h2>
+    <button
+      onclick="profileTab('liked',this)">
+      ❤️ Liked
+    </button>
 
-<div id="followingList" class="noData">
-You are not following anyone yet.
-</div>
+    <button
+      onclick="profileTab('drafts',this)">
+      📝 Drafts
+    </button>
 
-</div>
+  </div>
+
+  <div id="profileContent"></div>
+
+</main>
 
 
 <!-- NOTIFICATIONS -->
 
-<div id="notificationBox" class="overlay">
+<main id="notifications" class="page">
 
-<button class="close" onclick="closeOverlay('notificationBox')">✕</button>
+  <div class="section">
 
-<h2 style="margin-top:50px">🔔 Notifications</h2>
+    <h2>Notifications</h2>
 
-<div id="notifications">
+    <div class="notice">
+      ❤️ Alex liked your video
+      <span class="muted">2m</span>
+    </div>
 
-<div class="menu">
-❤️ Welcome to WorldVibe
-</div>
+    <div class="notice">
+      👤 Sara started following you
+      <span class="muted">15m</span>
+    </div>
 
-</div>
+    <div class="notice">
+      💬 Omar commented on your video
+      <span class="muted">1h</span>
+    </div>
 
-</div>
+    <div class="notice">
+      🎁 You received a gift
+      <span class="gold">+50 coins</span>
+    </div>
 
+    <div class="notice">
+      🏆 You reached Creator Level 2
+    </div>
 
-<!-- GIFTS -->
+  </div>
 
-<div id="giftBox" class="overlay">
+</main>
 
-<button class="close" onclick="closeOverlay('giftBox')">✕</button>
 
-<h2 style="margin-top:50px">🎁 Send Gift</h2>
+<!-- CREATOR CENTER -->
 
-<p class="muted">
-Choose a virtual gift.
-</p>
+<main id="creator" class="page">
 
-<div>
+  <div class="section">
 
-<button class="gift" onclick="sendGift(10)">
-🌹 Rose<br>10 coins
-</button>
+    <h2>Creator Center</h2>
 
-<button class="gift" onclick="sendGift(50)">
-❤️ Heart<br>50 coins
-</button>
+    <div class="grid">
 
-<button class="gift" onclick="sendGift(100)">
-💎 Diamond<br>100 coins
-</button>
+      <div class="stat">
+        <b>18.6K</b>
+        Views
+      </div>
 
-<button class="gift" onclick="sendGift(500)">
-👑 Crown<br>500 coins
-</button>
+      <div class="stat">
+        <b>2.4K</b>
+        Likes
+      </div>
 
-</div>
+      <div class="stat">
+        <b>128</b>
+        Followers
+      </div>
 
-<div class="coinBox">
-Your Coins:
-<strong id="giftCoins">0</strong>
-</div>
+      <div class="stat">
+        <b class="gold">1,850</b>
+        Coins
+      </div>
 
-</div>
+    </div>
 
 
-<!-- NOTIFICATION BUTTON -->
+    <div class="card cardpad">
 
-<button
-onclick="openNotifications()"
-style="
-position:fixed;
-top:13px;
-right:15px;
-z-index:45;
-font-size:22px;">
-🔔
-</button>
+      <h3>Estimated Earnings</h3>
 
-</div>
+      <div style="font-size:32px;font-weight:800">
+        $18.50
+      </div>
 
+      <p class="muted">
+        Demo balance. Real earnings require backend
+        and payment verification.
+      </p>
 
-<script>
+      <button
+        class="primary"
+        onclick="openModal('withdrawModal')">
+        💰 Withdrawal
+      </button>
 
-let likes=0;
-let liked=false;
-let followed=false;
-let followers=0;
-let following=0;
-let comments=0;
-let coins=0;
-let uploadedVideos=0;
-let myLikes=0;
+    </div>
 
-let followingUsers=[];
 
-function $(id){
- return document.getElementById(id);
-}
+    <div class="card cardpad">
 
+      <h3>Analytics</h3>
 
-/* HOME */
+      <div class="notice">
+        📈 Views +24% this week
+      </div>
 
-function goHome(){
+      <div class="notice">
+        ❤️ Engagement 12.8%
+      </div>
 
- closeAll();
+      <div class="notice">
+        👥 Followers +31 this week
+      </div>
 
- $('feed').scrollTop=0;
+      <div class="notice">
+        🏆 Best video: 8.2K views
+      </div>
 
-}
+    </div>
 
 
-/* PROFILE */
+    <div class="card cardpad">
 
-function openProfile(){
+      <h3>Creator Tools</h3>
 
- closeAll();
+      <div class="grid">
 
- $('profileBox').style.display='block';
+        <button class="secondary">🏅 Badges</button>
+        <button class="secondary">🎯 Missions</button>
+        <button class="secondary">📅 Schedule LIVE</button>
+        <button class="secondary">📣 Promote</button>
+        <button class="secondary">🎁 Gifts</button>
+        <button class="secondary">💎 Membership</button>
 
- updateStats();
+      </div>
 
-}
+    </div>
 
-function editProfile(){
+  </div>
 
- let name=prompt("Enter your name:");
+</main>
 
- if(name && name.trim()){
 
-  $('profileUsername').innerText="@"+name.trim();
+<!-- WALLET -->
 
- }
+<main id="wallet" class="page">
 
-}
+  <div class="section">
 
+    <h2>Coins & Gifts</h2>
 
-/* PROFILE PHOTO */
+    <div class="card cardpad">
 
-$('profilePhotoInput').onchange=function(){
+      <div class="muted">
+        Coin Balance
+      </div>
 
- if(this.files[0]){
+      <div
+        style="font-size:34px;font-weight:800"
+        class="gold">
 
-  let photo=$('profilePhoto');
+        🪙 <span id="coinBalance">
+          1000
+        </span>
 
-  let icon=$('profileIcon');
+      </div>
 
-  photo.src=URL.createObjectURL(this.files[0]);
+      <button
+        class="primary"
+        onclick="openModal('coinsModal')">
+        Buy Coins
+      </button>
 
-  photo.style.display='block';
+    </div>
 
-  icon.style.display='none';
 
- }
+    <div class="card cardpad">
 
-};
+      <h3>Send Gift</h3>
 
+      <div class="grid">
 
-/* LIKE */
+        <button
+          class="secondary"
+          onclick="gift(10)">
+          🌹 Rose 10
+        </button>
 
-function likeVideo(){
+        <button
+          class="secondary"
+          onclick="gift(50)">
+          💎 Diamond 50
+        </button>
 
- if(liked){
+        <button
+          class="secondary"
+          onclick="gift(100)">
+          🚀 Rocket 100
+        </button>
 
-  likes--;
+        <button
+          class="secondary"
+          onclick="gift(500)">
+          👑 Crown 500
+        </button>
 
-  liked=false;
+      </div>
 
- }else{
+    </div>
 
-  likes++;
 
-  liked=true;
+    <div class="card cardpad">
 
- }
+      <h3>Gift History</h3>
 
- $('likes').innerText=likes;
+      <div id="giftHistory" class="muted">
+        No gifts yet.
+      </div>
 
- myLikes=likes;
+    </div>
 
- $('myLikesCount').innerText=myLikes;
+  </div>
 
-}
+</main>
 
 
-/* FOLLOW */
+<!-- SETTINGS -->
 
-function followUser(){
+<main id="settings" class="page">
 
- if(followed){
+  <div class="section">
 
-  followed=false;
+    <h2>Settings</h2>
 
-  followers=Math.max(0,followers-1);
 
-  following=Math.max(0,following-1);
+    <div class="listitem">
 
-  followingUsers=followingUsers.filter(
-   x=>x!=='@worldvibe'
-  );
+      <b>🌙 Appearance</b>
 
- }else{
+      <br>
 
-  followed=true;
+      <button
+        class="secondary"
+        onclick="toggleTheme()">
+        Toggle Light / Dark
+      </button>
 
-  followers++;
+    </div>
 
-  following++;
 
-  followingUsers.push('@worldvibe');
+    <div class="listitem">
 
-  addNotification(
-   "You are now following @worldvibe"
-  );
+      <b>🌐 Language</b>
 
- }
+      <select onchange="toast('Language preference saved')">
 
- updateStats();
+        <option>English</option>
+        <option>Urdu</option>
+        <option>Arabic</option>
+        <option>Pashto</option>
+        <option>Hindi</option>
 
- document.querySelector('.followBtn').innerText=
- followed ? "✓ Following" : "+ Follow";
+      </select>
 
-}
+    </div>
 
 
-/* COMMENTS */
+    <div class="listitem">
 
-function commentVideo(){
+      <b>🔔 Notifications</b>
 
- let text=prompt("Write your comment:");
+      <button
+        class="secondary"
+        onclick="toast('Notification settings saved')">
+        Manage
+      </button>
 
- if(!text || !text.trim()) return;
+    </div>
 
- comments++;
 
- $('commentCount').innerText=comments;
+    <div class="listitem">
 
- let item=document.createElement('div');
+      <b>🔒 Privacy</b>
 
- item.className='commentItem';
+      <button
+        class="secondary"
+        onclick="openModal('privacyModal')">
+        Privacy Controls
+      </button>
 
- item.innerText="💬 "+text.trim();
+    </div>
 
- $('commentsBox').appendChild(item);
 
-}
+    <div class="listitem">
 
+      <b>🛡️ Security</b>
 
-/* SOUND */
+      <button
+        class="secondary"
+        onclick="openModal('securityModal')">
+        2FA / Sessions
+      </button>
 
-function toggleSound(){
+    </div>
 
- let v=$('video');
 
- v.muted=!v.muted;
+    <div class="listitem">
 
- $('soundText').innerText=
- v.muted ? "Sound" : "Mute";
+      <b>🚫 Blocked Users</b>
 
-}
+      <button
+        class="secondary"
+        onclick="toast('Blocked users manager ready')">
+        Manage
+      </button>
 
+    </div>
 
-/* SHARE */
 
-function shareVideo(){
+    <div class="listitem">
 
- if(navigator.share){
+      <b>📥 Your Data</b>
 
-  navigator.share({
+      <button
+        class="secondary"
+        onclick="exportData()">
+        Export Data
+      </button>
 
-   title:"WorldVibe",
+    </div>
 
-   text:"Check this video on WorldVibe 🌍🎬"
 
-  }).catch(()=>{});
+    <div class="listitem">
 
- }else{
+      <b>ℹ️ About WorldVibe</b>
 
-  alert("Share feature is available on this device/browser.");
-
- }
-
-}
-
-
-/* UPLOAD */
-
-function selectVideo(){
-
- $('videoInput').click();
-
-}
-
-$('videoInput').onchange=function(){
-
- if(!this.files[0]) return;
-
- let file=this.files[0];
-
- let url=URL.createObjectURL(file);
-
- let v=$('video');
-
- v.src=url;
-
- v.muted=false;
-
- v.controls=true;
-
- v.load();
-
- v.play().catch(()=>{});
-
- uploadedVideos++;
-
- updateStats();
-
- $('myVideos').innerHTML=
- '<div class="menu">🎬 '+escapeHtml(file.name)+'</div>';
-
- $('videoCaption').innerText=
- "My new WorldVibe video 🎬";
-
- addNotification(
-  "Your video was uploaded successfully."
- );
-
-};
-
-
-/* SEARCH */
-
-function openSearch(){
-
- closeAll();
-
- $('searchBox').style.display='block';
-
- setTimeout(()=>{
-  $('searchInput').focus();
- },100);
-
-}
-
-function searchUsers(){
-
- let q=$('searchInput').value.toLowerCase().trim();
-
- let box=$('searchResults');
-
- if(!q){
-
-  box.innerHTML=
-  '<div class="noData">Search WorldVibe</div>';
-
-  return;
-
- }
-
- let users=[
-  '@worldvibe',
-  '@creator',
-  '@music',
-  '@travel',
-  '@fun',
-  '@sports'
- ];
-
- let results=users.filter(
-  u=>u.includes(q)
- );
-
- if(results.length===0){
-
-  box.innerHTML=
-  '<div class="noData">No results found</div>';
-
-  return;
-
- }
-
- box.innerHTML='';
-
- results.forEach(user=>{
-
-  let div=document.createElement('div');
-
-  div.className='searchResult';
-
-  div.innerHTML=
-  '<b>'+user+'</b><br>'+
-  '<small class="muted">WorldVibe creator</small>';
-
-  box.appendChild(div);
-
- });
-
-}
-
-
-/* FOLLOWING */
-
-function openFollowing(){
-
- closeAll();
-
- $('followingBox').style.display='block';
-
- renderFollowing();
-
-}
-
-function renderFollowing(){
-
- let box=$('followingList');
-
- if(followingUsers.length===0){
-
-  box.className='noData';
-
-  box.innerText=
-  'You are not following anyone yet.';
-
-  return;
-
- }
-
- box.className='';
-
- box.innerHTML='';
-
- followingUsers.forEach(user=>{
-
-  let div=document.createElement('div');
-
-  div.className='searchResult';
-
-  div.innerHTML=
-  '👤 <b>'+user+'</b>';
-
-  box.appendChild(div);
-
- });
-
-}
-
-
-/* NOTIFICATIONS */
-
-function openNotifications(){
-
- closeAll();
-
- $('notificationBox').style.display='block';
-
-}
-
-function addNotification(text){
-
- let div=document.createElement('div');
-
- div.className='menu';
-
- div.innerText='🔔 '+text;
-
- $('notifications').prepend(div);
-
-}
-
-
-/* GIFTS */
-
-function openGifts(){
-
- closeAll();
-
- $('giftBox').style.display='block';
-
- $('giftCoins').innerText=coins;
-
-}
-
-function sendGift(amount){
-
- if(coins < amount){
-
-  alert(
-   "Not enough coins in prototype."
-  );
-
-  return;
-
- }
-
- coins-=amount;
-
- $('giftCoins').innerText=coins;
-
- $('coins').innerText=coins;
-
- addNotification(
-  "You sent a gift worth "+amount+" coins."
- );
-
- alert("Gift sent 🎁");
-
-}
-
-
-/* EARNINGS */
-
-function showEarnings(){
-
- alert(
-  "Creator Earnings\n\n"+
-  "Coins: "+coins+"\n\n"+
-  "Real money withdrawals will be connected later with a secure payment system."
- );
-
-}
-
-
-/* REPORT */
-
-function showReport(){
-
- let text=prompt(
-  "Tell us about the problem:"
- );
-
- if(text){
-
-  addNotification(
-   "Your report has been submitted."
-  );
-
-  alert(
-   "Report submitted successfully."
-  );
-
- }
-
-}
-
-
-/* BLOCK */
-
-function showBlock(){
-
- if(confirm(
-  "Block @worldvibe?"
- )){
-
-  addNotification(
-   "User blocked in prototype."
-  );
-
-  alert("User blocked.");
-
- }
-
-}
-
-
-/* STATS */
-
-function updateStats(){
-
- $('myVideosCount').innerText=
- uploadedVideos;
-
- $('followersCount').innerText=
- followers;
-
- $('followingCount').innerText=
- following;
-
- $('myLikesCount').innerText=
- myLikes;
-
-}
-
-
-/* CLOSE */
-
-function closeOverlay(id){
-
- $(id).style.display='none';
-
-}
-
-function closeAll(){
-
- document.querySelectorAll('.overlay')
- .forEach(x=>{
-  x.style.display='none';
- });
-
-}
-
-
-/* ESCAPE */
-
-function escapeHtml(text){
-
- return text
- .replace(/&/g,'&amp;')
- .replace(/</g,'&lt;')
- .replace(/>/g,'&gt;')
- .replace(/"/g,'&quot;')
- .replace(/'/g,'&#039;');
-
-}
-
-
-/* INITIAL */
-
-updateStats();
-
-</script>
-
-</body>
-</html>
+      <p class
