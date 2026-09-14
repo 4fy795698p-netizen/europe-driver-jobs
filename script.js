@@ -1,1 +1,31 @@
-const jobs=[['Bus Driver — Germany','Germany','Bus Driver'],['Warehouse Worker — Poland','Poland','Warehouse'],['Truck Driver — Hungary','Hungary','Truck Driver'],['Logistics Worker — Czech Republic','Czech Republic','Warehouse']];function render(list){document.getElementById('jobsList').innerHTML=list.length?list.map(j=>`<article class="job"><div><span class="tag">DEMO / NOT VERIFIED</span><h3>${j[0]}</h3><p>${j[2]} · ${j[1]} · Verify salary and employer before applying.</p></div><a class="apply" href="#about">How to apply</a></article>`).join(''):'<article class="job"><b>No matching jobs found.</b></article>'}function filterJobs(){let q=document.getElementById('q').value.toLowerCase(),c=document.getElementById('country').value;render(jobs.filter(j=>(!q||j.join(' ').toLowerCase().includes(q))&&(!c||j[1]===c)))}render(jobs);document.getElementById('q').addEventListener('keydown',e=>{if(e.key==='Enter')filterJobs()});
+const jobs = [];
+
+function render(list) {
+  document.getElementById('jobsList').innerHTML =
+    '<article class="job">' +
+    '<span class="pill">OFFICIAL SOURCE</span>' +
+    '<h3>Bus Driver – Germany</h3>' +
+    '<p>🚌 Heavy Bus / Coach Driver</p>' +
+    '<p>📍 Germany · Work Permit</p>' +
+    '<p>💶 Salary: To be confirmed by employer</p>' +
+    '<p>✅ UAE Heavy Bus licence & experience preferred</p>' +
+    '<a href="https://www.arbeitsagentur.de/jobsuche/jobdetail/12456-1625822-1-S" target="_blank" rel="noopener">View Official Job</a>' +
+    '</article>';
+}
+
+function filterJobs() {
+  const q = document.getElementById('q').value.toLowerCase();
+  const c = document.getElementById('country').value;
+
+  if (
+    (!q || 'bus driver germany'.includes(q)) &&
+    (!c || c === 'Germany')
+  ) {
+    render([]);
+  } else {
+    document.getElementById('jobsList').innerHTML =
+      '<article class="job"><b>No matching jobs found.</b></article>';
+  }
+}
+
+render([]);
