@@ -86,7 +86,8 @@ document.getElementById("file").onchange=function(){
  if(this.files[0]){
   let v=document.getElementById("video");
   v.src=URL.createObjectURL(this.files[0]);
-  v.muted=false;
+  v.muted=true;
+v.controls=true;
   v.play();
  }
 };
