@@ -61,16 +61,15 @@ WorldVibe 🌍
 <script>
 let n=0;
 
+let liked=false;
+
 function like(){
- let btn=document.querySelector('.actions button');
- if(btn.classList.contains('liked')){
+ if(liked){
   n--;
-  btn.classList.remove('liked');
-  btn.style.opacity="1";
+  liked=false;
  }else{
   n++;
-  btn.classList.add('liked');
-  btn.style.opacity="0.6";
+  liked=true;
  }
  document.getElementById("likes").innerText=n;
 }
