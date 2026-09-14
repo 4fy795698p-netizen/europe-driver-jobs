@@ -281,3 +281,43 @@ footer{
     font-size:31px;
   }
 }
+/* EMPLOYER FORM */
+
+#employer-form{
+  background:white;
+  border:1px solid #e1e6ee;
+  border-radius:14px;
+  padding:30px;
+  margin-top:30px;
+}
+
+#employer-form form{
+  display:grid;
+  gap:10px;
+  max-width:700px;
+  margin-top:20px;
+}
+
+#employer-form label{
+  font-weight:700;
+  margin-top:8px;
+}
+
+#employer-form input,
+#employer-form textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d7dce5;
+  border-radius:8px;
+  font-size:15px;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+#employer-form textarea{
+  resize:vertical;
+}
+
+#employer-form button{
+  width:max-content;
+  margin-top:10px;
+}
