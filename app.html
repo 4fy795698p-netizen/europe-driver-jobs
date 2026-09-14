@@ -293,7 +293,52 @@ hr{
   </div>
 </header>
 
+<!-- AUTH MODAL -->
 
+<div id="authModal" class="modal">
+
+  <div class="sheet">
+
+    <button class="close" onclick="closeModal('authModal')">×</button>
+
+    <h2 id="authTitle">WorldVibe Login</h2>
+
+    <p class="muted">
+      Login or create your WorldVibe account.
+    </p>
+
+    <input
+      id="authEmail"
+      type="email"
+      placeholder="Email">
+
+    <input
+      id="authPassword"
+      type="password"
+      placeholder="Password">
+
+    <button
+      class="primary"
+      style="width:100%;margin-top:8px"
+      onclick="firebaseLogin()">
+      Login
+    </button>
+
+    <button
+      class="secondary"
+      style="width:100%;margin-top:8px"
+      onclick="firebaseSignup()">
+      Create Account
+    </button>
+
+    <div id="authStatus"
+      class="notice"
+      style="display:none">
+    </div>
+
+  </div>
+
+</div>
 <!-- HOME -->
 
 <main id="home" class="page active">
