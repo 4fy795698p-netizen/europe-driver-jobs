@@ -1487,7 +1487,102 @@ hr{
   console.log("WorldVibe Firebase connected ✅");
 </script>
 <script>
+<script>
+async function firebaseSignup(){
 
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const status =
+    document.getElementById("authStatus");
+
+  if(!email || !password){
+    status.style.display="block";
+    status.textContent="Email and password required.";
+    return;
+  }
+
+  if(password.length < 6){
+    status.style.display="block";
+    status.textContent="Password must be at least 6 characters.";
+    return;
+  }
+
+  try{
+
+    const { createUserWithEmailAndPassword } =
+      await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js");
+
+    await createUserWithEmailAndPassword(
+      window.firebaseAuth,
+      email,
+      password
+    );
+
+    status.style.display="block";
+    status.textContent="Account created successfully ✅";
+
+    setTimeout(()=>{
+      closeModal("authModal");
+    },1200);
+
+  }catch(error){
+
+    status.style.display="block";
+    status.textContent=error.message;
+
+  }
+
+}
+
+
+async function firebaseLogin(){
+
+  const email =
+    document.getElementById("authEmail").value.trim();
+
+  const password =
+    document.getElementById("authPassword").value;
+
+  const status =
+    document.getElementById("authStatus");
+
+  if(!email || !password){
+    status.style.display="block";
+    status.textContent="Email and password required.";
+    return;
+  }
+
+  try{
+
+    const { signInWithEmailAndPassword } =
+      await import("https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js");
+
+    await signInWithEmailAndPassword(
+      window.firebaseAuth,
+      email,
+      password
+    );
+
+    status.style.display="block";
+    status.textContent="Login successful ✅";
+
+    setTimeout(()=>{
+      closeModal("authModal");
+    },1200);
+
+  }catch(error){
+
+    status.style.display="block";
+    status.textContent=error.message;
+
+  }
+
+}
+</script>
 /* =========================
    WORLDVIBE DATA
 ========================= */
