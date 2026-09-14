@@ -55,7 +55,39 @@ src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"><
 <button>♡<span>Following</span></button>
 <button onclick="document.getElementById('profileBox').style.display='block'">👤<span>Profile</span></button>
 </nav>
+<div id="profileBox" style="display:none;position:fixed;inset:0;background:#111;color:white;z-index:50;padding:25px 18px;overflow:auto;">
 
+<button onclick="document.getElementById('profileBox').style.display='none'"
+style="position:absolute;right:15px;top:15px;font-size:25px;">✕</button>
+
+<div style="text-align:center;margin-top:35px;">
+<div style="width:90px;height:90px;border-radius:50%;background:#333;margin:auto;display:flex;align-items:center;justify-content:center;font-size:45px;">
+👤
+</div>
+
+<h2 style="margin-bottom:5px;">@worldvibe</h2>
+<p style="color:#aaa;">WorldVibe 🌍</p>
+
+<button style="background:white;color:black;border-radius:10px;padding:10px 30px;font-size:16px;">
+✏️ Edit Profile
+</button>
+</div>
+
+<div style="display:flex;justify-content:space-around;text-align:center;margin:30px 0;">
+<div><b>0</b><small>Videos</small></div>
+<div><b>0</b><small>Followers</small></div>
+<div><b>0</b><small>Following</small></div>
+<div><b>0</b><small>Likes</small></div>
+</div>
+
+<hr style="border-color:#333;">
+
+<h3>🎬 My Videos</h3>
+<div style="text-align:center;color:#888;padding:40px 0;">
+No videos yet
+</div>
+
+</div>
 <div style="position:fixed;top:15px;left:15px;z-index:10;font-size:24px;font-weight:bold;">
 WorldVibe 🌍
 </div>
