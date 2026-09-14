@@ -78,6 +78,16 @@ function comment(){
  if(text){
   let count=document.getElementById("commentCount");
   count.innerText=Number(count.innerText)+1;
+
+  let box=document.getElementById("commentsBox");
+  let newComment=document.createElement("div");
+  newComment.innerText="💬 "+text;
+  newComment.style.marginTop="8px";
+  newComment.style.background="rgba(0,0,0,.7)";
+  newComment.style.padding="8px 12px";
+  newComment.style.borderRadius="12px";
+
+  box.appendChild(newComment);
  }
 }
 function sound(){
