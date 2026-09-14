@@ -62,8 +62,18 @@ WorldVibe 🌍
 let n=0;
 
 function like(){
- n++;
+ let btn=document.querySelector('.actions button');
+ if(btn.classList.contains('liked')){
+  n--;
+  btn.classList.remove('liked');
+  btn.style.opacity="1";
+ }else{
+  n++;
+  btn.classList.add('liked');
+  btn.style.opacity="0.6";
+ }
  document.getElementById("likes").innerText=n;
+}
 }
 
 function sound(){
