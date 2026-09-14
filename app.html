@@ -104,6 +104,12 @@ let n=0;
 
 let liked=false;
 function editProfile(){
+ let name=prompt("Enter your name:");
+ if(name){
+  document.querySelector("#profileBox h2").innerText="@"+name;
+ }
+}
+
 document.getElementById("profilePhotoInput").onchange=function(){
  if(this.files[0]){
   let photo=document.getElementById("profilePhoto");
@@ -114,11 +120,6 @@ document.getElementById("profilePhotoInput").onchange=function(){
   icon.style.display="none";
  }
 };
- let name=prompt("Enter your name:");
- if(name){
-  document.querySelector("#profileBox h2").innerText="@"+name;
- }
-}
 function like(){
  if(liked){
   n--;
